@@ -175,7 +175,7 @@
                             </template>
                         </v-data-table>
                         <v-flex class="text-right mt-2 mr-10">
-                            <strong>Total: </strong>{{total=(calcularTotal).toFixed(2)}}
+                            <strong>Total:</strong>{{total=(calcularTotal).toFixed(2)}}
                         </v-flex>
                     </v-container>
                 </template>
@@ -266,7 +266,7 @@
                                         <tbody>
                                             <tr>
                                                 <td id="datosolic" style=" width: 50%; ">
-                                                    <strong>Fecha de solicitud: </strong>{{fechasolicitud}}<br>
+                                                    <strong>Fecha de solicitud: </strong>{{fechasolicitada}}<br>
                                                     <strong>Solicitado por: </strong>{{solicitante}}<br>
                                                     <strong>Regional: </strong>{{regional}}<br>
                                                     <strong>Tipo de Gasto: </strong>{{tipodegasto}}<br>
@@ -320,7 +320,7 @@
                                             <tr>
                                                 <th></th>   
                                                 <th style="text-align:right; border: 1px solid black; padding: 2px;">TOTAL</th>
-                                                <th style="text-align:right; border: 1px solid black; padding: 2px;">{{moneda}} {{total.toFixed(2)}}</th>
+                                                <th style="text-align:right; border: 1px solid black; padding: 2px;">{{moneda}} {{total=(calcularTotal).toFixed(2)}}</th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -453,6 +453,7 @@
             return this.editedIndex === -1 ? 'La solicitud ha sido Aprobada' : 'La solicitud ha sido rechazada'
             },
             calcularTotal:function(){
+                this.total=0;
                 var resultado=0.0;
                 for(var i=0;i<this.detalles.length;i++){
                     resultado=resultado+(this.detalles[i].monto*1);
@@ -460,6 +461,7 @@
                 }
                 return resultado;
             }
+        
         },
 
         watch: {
@@ -720,7 +722,7 @@
             
             mostrarSolicitud(item){
                 this.id=item.idordendepago;
-                this.fechasolicitud=item.fechasolicitud;
+                this.fechasolicitada=item.fechasolicitud;
                 this.fechaprogramada=item.fechaprogramada;
                 this.solicitante=item.usuario;
                 this.aprobador=item.aprobador;
@@ -734,7 +736,7 @@
                 this.concepto=item.concepto;
                 this.idempresa=item.idempresa;
                 this.moneda=item.moneda;
-                this.total=item.total;
+                //this.total=item.total;
                 if(item.factura){
                     this.fact="SI";
                 }else
