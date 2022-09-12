@@ -10,3 +10,11 @@ C:\ASP Net Core Vuejs\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidad
 C:\ASP Net Core Vuejs\Sistema\Sistema.Entidades\obj\Debug\net5.0\ref\Sistema.Entidades.dll
 C:\ASP Net Core Vuejs\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidades.pdb
 C:\asp net core vuejs\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidades.csproj.AssemblyReference.cache
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidades.csproj.AssemblyReference.cache
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidades.GeneratedMSBuildEditorConfig.editorconfig
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidades.AssemblyInfoInputs.cache
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidades.AssemblyInfo.cs
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidades.csproj.CoreCompileInputs.cache
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidades.dll
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Entidades\obj\Debug\net5.0\ref\Sistema.Entidades.dll
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidades.pdb
