@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sistema.Entidades.Tesoreria;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Sistema.Entidades.Administracion
 {
-    public class cuentasalida
+    public class Cuentasalida
     {
         public int idcuentasalida { get; set; }
 
@@ -28,6 +29,6 @@ namespace Sistema.Entidades.Administracion
 
 
 
-        //public ICollection<Ordendepago> ordendepago { get; set; }
+        public ICollection<Op_cargado> op_cargado { get; set; }
     }
 }

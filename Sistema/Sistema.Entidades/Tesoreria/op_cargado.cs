@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Sistema.Entidades.Administracion;
+using Sistema.Entidades.Solicitud;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Sistema.Entidades.Tesoreria
 {
-    public class op_cargado
+    public class Op_cargado
     {
         public int idcargado { get; set; }
         [Required]
@@ -16,10 +18,14 @@ namespace Sistema.Entidades.Tesoreria
         public int idordendepago { get; set; }
         [Required]
         [ForeignKey("cuentasalida")]
-        public int idcuentasalid { get; set; }
+        public int idcuentasalida { get; set; }
         public string lote { get; set; }
         public DateTime fecha { get; set; }
 
-        //public ICollection<Ordendepago> ordendepago { get; set; }
+        public Ordendepago ordendepago { get; set; }
+        public Cuentasalida cuentasalida { get; set; }
+       
+
+        
     }
 }

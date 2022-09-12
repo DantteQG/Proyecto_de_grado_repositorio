@@ -1,5 +1,6 @@
 ﻿using Sistema.Entidades.Administracion;
 using Sistema.Entidades.Usuarios;
+using Sistema.Entidades.Tesoreria;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -79,6 +80,7 @@ namespace Sistema.Entidades.Solicitud
         public Cuenta cuenta { get; set; }
 
         public ICollection<Detalleorden> detalleorden { get; set; }
-        
+        public ICollection<Op_cargado> op_cargado { get; set; }
+
     }
 }
