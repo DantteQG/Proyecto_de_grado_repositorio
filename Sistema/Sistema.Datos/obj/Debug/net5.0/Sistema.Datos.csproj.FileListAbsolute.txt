@@ -16,3 +16,21 @@ C:\ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.dll
 C:\ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\ref\Sistema.Datos.dll
 C:\ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.pdb
 C:\ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.genruntimeconfig.cache
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\bin\Debug\net5.0\Sistema.Datos.deps.json
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\bin\Debug\net5.0\Sistema.Datos.runtimeconfig.json
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\bin\Debug\net5.0\Sistema.Datos.runtimeconfig.dev.json
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\bin\Debug\net5.0\Sistema.Datos.dll
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\bin\Debug\net5.0\ref\Sistema.Datos.dll
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\bin\Debug\net5.0\Sistema.Datos.pdb
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\bin\Debug\net5.0\Sistema.Entidades.dll
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\bin\Debug\net5.0\Sistema.Entidades.pdb
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.csproj.AssemblyReference.cache
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.AssemblyInfoInputs.cache
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.AssemblyInfo.cs
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.csproj.CoreCompileInputs.cache
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.csproj.CopyComplete
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.dll
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\ref\Sistema.Datos.dll
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.pdb
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.genruntimeconfig.cache
