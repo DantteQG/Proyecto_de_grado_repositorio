@@ -218,6 +218,15 @@ var router = new Router({
       }
     },
     {
+      path: '/porconfirmar',
+      name: 'porconfirmar',
+      component: Porconfirmar,
+      meta: {
+        administrador: true,
+        tesoreria: true,
+      }
+    },
+    {
       path: '/enviadosparticipados',
       name: 'enviadosparticipados',
       component: Enviadosparticipados,
