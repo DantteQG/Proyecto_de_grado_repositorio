@@ -80,6 +80,16 @@
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
+            <v-list-item :to="{ name: 'cuentasalidas'}">
+              <v-list-item-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>
+                  Cuentas salidas
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
             <v-list-item :to="{ name: 'especifgastos'}">
               <v-list-item-action>
                 <v-icon>table_chart</v-icon>

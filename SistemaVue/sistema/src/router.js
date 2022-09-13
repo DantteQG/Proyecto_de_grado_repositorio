@@ -23,6 +23,7 @@ import Ordendepago from './components/Ordendepago.vue'
 import Poraprobar from './components/Poraprobar.vue'
 import Enviadosparticipados from './components/Enviadosparticipados.vue'
 import Porcargar from './components/Porcargar.vue'
+import Cuentasalida from './components/Cuentasalida.vue'
 
 
 Vue.use(Router)
@@ -130,6 +131,15 @@ var router = new Router({
       meta: {
         administrador: true,       
         creadorcuenta: true,
+        tesoreria: true
+      }
+    },
+    {
+      path: '/cuentasalidas',
+      name: 'cuentasalidas',
+      component: Cuentasalida,
+      meta: {
+        administrador: true,       
         tesoreria: true
       }
     },

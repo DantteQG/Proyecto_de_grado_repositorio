@@ -32,7 +32,7 @@ namespace Sistema.Web.Controllers
 
             return cuentasalida.Select(cs => new CuentasalidaViewModel
             {
-                idcuentasalida = c.idcuentasalida,
+                idcuentasalida = cs.idcuentasalida,
                 idbanco = cs.idbanco,
                 banco = cs.banco.nombre,
                 idmoneda = cs.idmoneda,
