@@ -37,7 +37,7 @@ namespace Sistema.Datos
 
         public DbSet<Cuentasalida> Cuentasalidas { get; set; }
         public DbSet<Op_cargado> Op_cargados { get; set; }
-        public DbSet<Op_confirmado> op_Confirmados { get; set; }
+        public DbSet<Op_confirmado> Op_confirmados { get; set; }
         public DbContextSistema(DbContextOptions<DbContextSistema> options) : base(options)
         {
 

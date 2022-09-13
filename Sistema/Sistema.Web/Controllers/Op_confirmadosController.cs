@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sistema.Datos;
 using Sistema.Entidades.Tesoreria;
+using Sistema.Web.Models.Tesoreria.Op_confirmado;
 
 namespace Sistema.Web.Controllers
 {
@@ -21,7 +22,37 @@ namespace Sistema.Web.Controllers
             _context = context;
         }
 
-        
+        // POST: api/Op_confirmados/Crear
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost("[action]")]
+        public async Task<ActionResult> Crear([FromBody] CrearViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            DateTime fecha = DateTime.Now;
+
+            Op_confirmado op_confirmado = new Op_confirmado
+            {
+                idordendepago = model.idordendepago,
+                fecha = fecha
+            };
+
+            _context.Op_confirmados.Add(op_confirmado);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+
+        }
 
         private bool Op_confirmadoExists(int id)
         {
