@@ -9,16 +9,14 @@ using System.Threading.Tasks;
 
 namespace Sistema.Datos.Mapping.Administracion
 {
-    class CuentaMap : IEntityTypeConfiguration<Cuenta>
+    class CuentasalidaMap : IEntityTypeConfiguration<Cuentasalida>
     {
-        public void Configure(EntityTypeBuilder<Cuenta> builder)
+        public void Configure(EntityTypeBuilder<Cuentasalida> builder)
         {
-            builder.ToTable("Cuenta")
-                .HasKey(c => c.idcuenta);
-
+            builder.ToTable("cuentasalida")
+                .HasKey(cs => cs.idcuentasalida);
 
         }
+        
     }
 }
-
-
