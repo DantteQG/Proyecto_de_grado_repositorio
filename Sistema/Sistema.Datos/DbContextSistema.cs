@@ -37,7 +37,7 @@ namespace Sistema.Datos
 
         public DbSet<Cuentasalida> Cuentasalidas { get; set; }
         public DbSet<Op_cargado> Op_cargados { get; set; }
-
+        public DbSet<Op_confirmado> op_Confirmados { get; set; }
         public DbContextSistema(DbContextOptions<DbContextSistema> options) : base(options)
         {
 
@@ -64,6 +64,7 @@ namespace Sistema.Datos
             modelBuilder.ApplyConfiguration(new DetalleordenMap());
             modelBuilder.ApplyConfiguration(new CuentasalidaMap());
             modelBuilder.ApplyConfiguration(new Op_cargadoMap());
+            modelBuilder.ApplyConfiguration(new Op_confirmadoMap());
         }
 
 
