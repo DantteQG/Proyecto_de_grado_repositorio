@@ -2,7 +2,7 @@
     <v-layout align-start>
         <v-flex>
             <v-container v-if="verOrdenpago==0">
-                <v-toolbar flat color="white">
+                <v-toolbar  color="white">
                     <v-toolbar-title>Orden de pago por cargar</v-toolbar-title>
                     <v-divider
                     class="mx-2"
@@ -196,7 +196,7 @@
                         </v-flex>
                         <v-row>
                             <v-spacer></v-spacer>
-                            <v-btn class="mt-2 mr-10" color="blue darken-1" @click="aprobar(1)" >Aprobar</v-btn>
+                            <v-btn class="mt-2 mr-10" color="blue darken-1" @click="MostrarCargabanco" >Cargar banco</v-btn>
                             <v-btn class="mt-2 mr-10" color="red darken-1" @click="aprobar(0)" >Rechazar</v-btn>
                             <v-btn class="mt-2" color="primary" @click="volver">Volver</v-btn>
                             <v-spacer></v-spacer>
@@ -236,6 +236,33 @@
                     </div>
                 </v-flex>
             </v-container>
+            <v-dialog v-model="dialoglote" max-width="500px">
+                <v-card>
+                    <v-card-title>
+                        <span class="headline">Cargar banco solicitud: {{id}}</span>
+                    </v-card-title>
+        
+                    <v-card-text>
+                        <v-container grid-list-md>
+                            <v-layout wrap>
+                                <v-flex xs12 sm12 md50>
+                                        <v-select v-model="idcuentasalida" 
+                                        :items="cuentasalidas" label="Banco"></v-select>
+                                    </v-flex>
+                                    <v-flex xs12 sm12 md12>
+                                        <v-text-field v-model="lote" label="lote"></v-text-field>
+                                    </v-flex>
+                            </v-layout>
+                        </v-container>
+                    </v-card-text>
+        
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1"  @click.native="cerrardialoglote">Cancelar</v-btn>
+                        <v-btn color="blue darken-1"  @click.native="Cargabanco(1)">Guardar</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
         </v-flex>
     </v-layout>
 </template>
@@ -326,11 +353,16 @@
                 menu: false,
                 modal: false,
                 menu2: false,
+
+                dialoglote:false,
+                cuentasalidas:[],
+                idcuentasalida:'',
+                lote:''
             }
         },
         computed: {
              formTitle () {
-            return this.editedIndex === -1 ? 'La solicitud ha sido Aprobada' : 'La solicitud ha sido rechazada'
+            return this.editedIndex === -1 ? 'La solicitud ha sido Cargada ' : 'La solicitud ha sido rechazada'
             },
             calcularTotal:function(){
                 var resultado=0.0;
@@ -514,6 +546,20 @@
                 }).catch(function(error){
                     console.log(error);
                 });
+
+                var CuentasalidasArray=[];
+         
+                axios.get('api/Cuentasalidas/Select').then(function(response)
+                {
+                    //console.log(response);
+                    CuentasalidasArray=response.data;
+                    CuentasalidasArray.map(function(x){
+                        me.cuentasalidas.push({text: x.moneda+' - '+x.cuenta+' - '+x.banco,value:x.idcuentasalida});
+                    });
+                    //me.codigobanco=Cuentas.text2;
+                }).catch(function(error){
+                    console.log(error);
+                });
                      
             },
 
@@ -600,11 +646,21 @@
                 this.editedIndex=-1;
             },
 
-            aprobar(estado){
+            MostrarCargabanco(){
+                this.dialoglote=1;
+            },
+            cerrardialoglote(){
+                this.dialoglote=0;
+                this.lote='';
+                this.idcuentasalida='';
+            },
+
+            Cargabanco(estado){
                 this.convertirnumero();
                 
                 let me=this;
                 me.total=me.total*1
+                me.dialoglote=true
                 if(estado==1)
                 {  
                     if(this.validar()){
@@ -612,7 +668,7 @@
                     }
                     axios.put('api/Ordendepagos/Actualizar',{
                         'idordendepago':me.id,
-                        'idestado':2,
+                        'idestado':3,
                         'idusuario':me.idusuario,
                         'idaprobador':me.idaprobador,
                         'idcontador':me.idcontador,
@@ -632,9 +688,15 @@
                         'total':me.total,
                         'detalleorden':me.detalles
 
+                    })
+                    axios.post('api/Op_cargados/Crear',{
+                        'idordendepago':me.id,
+                        'idcuentasalida':me.idcuentasalida,
+                        'lote':me.lote
                     }).then(function(response){            
                         me.dialog=true;
-                        me.editedIndex=-1; 
+                        me.editedIndex=-1;
+                        me.cerrardialoglote();
                         this.validaMensaje=[];       
                     }).catch(function(error){
                         console.log(error);

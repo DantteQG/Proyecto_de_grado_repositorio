@@ -36,7 +36,7 @@ namespace Sistema.Datos
         public DbSet<Detalleorden> Detalleordenes { get; set; }
 
         public DbSet<Cuentasalida> Cuentasalidas { get; set; }
-        public DbSet<Op_cargado> op_Cargados { get; set; }
+        public DbSet<Op_cargado> Op_cargados { get; set; }
 
         public DbContextSistema(DbContextOptions<DbContextSistema> options) : base(options)
         {

@@ -55,7 +55,7 @@ namespace Sistema.Web.Controllers
             return cuentasalida.Select(cs => new SelectViewModel
             {
                 idcuentasalida = cs.idcuentasalida,
-                banco = cs.banco.nombre,
+                banco = cs.banco.alias,
                 moneda = cs.moneda.nombre,
                 cuenta = cs.cuenta
             });
