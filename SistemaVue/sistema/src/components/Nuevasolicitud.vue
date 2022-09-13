@@ -214,6 +214,7 @@
                 idmoneda:'',
                 idproyecto:1,
                 idmodopago:1,
+                idcontador:'',
                 factura: false,
                 recibo: false,
                 idcuenta:'',

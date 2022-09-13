@@ -197,7 +197,7 @@
                         <v-row>
                             <v-spacer></v-spacer>
                             <v-btn class="mt-2 mr-10" color="blue darken-1" @click="MostrarCargabanco" >Cargar banco</v-btn>
-                            <v-btn class="mt-2 mr-10" color="red darken-1" @click="aprobar(0)" >Rechazar</v-btn>
+                            <v-btn class="mt-2 mr-10" color="red darken-1" @click="cargaBanco(0)" >Rechazar</v-btn>
                             <v-btn class="mt-2" color="primary" @click="volver">Volver</v-btn>
                             <v-spacer></v-spacer>
                         </v-row >
@@ -259,7 +259,7 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn color="blue darken-1"  @click.native="cerrardialoglote">Cancelar</v-btn>
-                        <v-btn color="blue darken-1"  @click.native="Cargabanco(1)">Guardar</v-btn>
+                        <v-btn color="blue darken-1"  @click.native="cargaBanco(1)">Guardar</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -655,12 +655,11 @@
                 this.idcuentasalida='';
             },
 
-            Cargabanco(estado){
+            cargaBanco(estado){
                 this.convertirnumero();
                 
                 let me=this;
                 me.total=me.total*1
-                me.dialoglote=true
                 if(estado==1)
                 {  
                     if(this.validar()){
@@ -687,7 +686,6 @@
                         'concepto':me.concepto,
                         'total':me.total,
                         'detalleorden':me.detalles
-
                     })
                     axios.post('api/Op_cargados/Crear',{
                         'idordendepago':me.id,
@@ -697,7 +695,7 @@
                         me.dialog=true;
                         me.editedIndex=-1;
                         me.cerrardialoglote();
-                        this.validaMensaje=[];       
+                        me.validaMensaje=[];       
                     }).catch(function(error){
                         console.log(error);
                     })
@@ -723,7 +721,7 @@
                         'idaprobador':me.idaprobador,
                     }).then(function(response){            
                         me.dialogAprobador=true;
-                        this.validaMensaje=[];        
+                        me.validaMensaje=[];        
                     }).catch(function(error){
                         console.log(error);
                     })

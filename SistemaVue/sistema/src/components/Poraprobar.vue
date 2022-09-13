@@ -601,12 +601,12 @@
                 this.editedIndex=-1;
             },
 
-            aprobar(estado){
+            aprobar(est){
                 this.convertirnumero();
                 
                 let me=this;
                 me.total=me.total*1
-                if(estado==1)
+                if(est==1)
                 {  
                     if(this.validar()){
                         return;
@@ -636,12 +636,12 @@
                     }).then(function(response){            
                         me.dialog=true;
                         me.editedIndex=-1; 
-                        this.validaMensaje=[];       
+                        me.validaMensaje=[];       
                     }).catch(function(error){
                         console.log(error);
                     })
                 }
-                if(estado==0)
+                if(est==0)
                 {
                     this.adId=me.id;
                     axios.put('api/Ordendepagos/Rechazar/'+this.adId,{
@@ -662,7 +662,7 @@
                         'idaprobador':me.idaprobador,
                     }).then(function(response){            
                         me.dialogAprobador=true;
-                        this.validaMensaje=[];        
+                        me.validaMensaje=[];        
                     }).catch(function(error){
                         console.log(error);
                     })
