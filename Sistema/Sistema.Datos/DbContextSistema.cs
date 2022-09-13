@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sistema.Datos.Mapping.Administracion;
 using Sistema.Datos.Mapping.Solicitud;
+using Sistema.Datos.Mapping.Tesoreria;
 using Sistema.Datos.Mapping.Usuarios;
 using Sistema.Entidades.Administracion;
 using Sistema.Entidades.Solicitud;
+using Sistema.Entidades.Tesoreria;
 using Sistema.Entidades.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -33,6 +35,9 @@ namespace Sistema.Datos
         public DbSet<Ordendepago> Ordendepagos { get; set; }
         public DbSet<Detalleorden> Detalleordenes { get; set; }
 
+        public DbSet<Cuentasalida> Cuentasalidas { get; set; }
+        public DbSet<Op_cargado> op_Cargados { get; set; }
+
         public DbContextSistema(DbContextOptions<DbContextSistema> options) : base(options)
         {
 
@@ -57,6 +62,8 @@ namespace Sistema.Datos
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             modelBuilder.ApplyConfiguration(new OrdendepagoMap());
             modelBuilder.ApplyConfiguration(new DetalleordenMap());
+            modelBuilder.ApplyConfiguration(new CuentasalidaMap());
+            modelBuilder.ApplyConfiguration(new Op_cargadoMap());
         }
 
 
