@@ -1,8 +1,8 @@
 <template>
     <v-layout align-start>
         <v-flex>
-            <v-toolbar flat color="white">
-                <v-toolbar-title>Cuentas Bancarias</v-toolbar-title>
+            <v-toolbar  color="white">
+                <v-toolbar-title>Cuentas salidas bancarias</v-toolbar-title>
                 <v-divider
                 class="mx-2"
                 inset
@@ -38,24 +38,10 @@
                                         <v-text-field v-model="cuenta" label="Cuenta"></v-text-field>
                                     </v-flex>
                                     <v-flex xs12 sm12 md12>
-                                        <v-text-field v-model="nombre" label="Nombre"></v-text-field>
-                                    </v-flex>
-                                    <v-flex xs12 sm12 md12>
-                                        <v-text-field v-model="correo" label="Correo electronico"></v-text-field>
-                                    </v-flex>
-                                    <v-flex xs12 sm12 md12>
                                         <v-text-field v-model="descripcion" label="Descripcion"></v-text-field>
                                     </v-flex>
-                                    <v-flex xs12 sm12 md12>
-                                        <v-text-field v-model="usuario" label="Nombre" disabled></v-text-field>
-                                    </v-flex>    
-                                    <v-flex xs12 sm12 md12>
-                                        <v-checkbox v-model="esempleado" label="Es empleado"></v-checkbox>
-                                    </v-flex>
-                                    
                                     <v-flex xs12 sm12 md12 v-show="valida">
                                         <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v">
-
                                         </div>
                                     </v-flex>
                             
@@ -65,8 +51,8 @@
             
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" flat @click.native="close">Cancelar</v-btn>
-                            <v-btn color="blue darken-1" flat @click.native="guardar">Guardar</v-btn>
+                            <v-btn color="blue darken-1"  @click.native="close">Cancelar</v-btn>
+                            <v-btn color="blue darken-1"  @click.native="guardar">Guardar</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
@@ -82,13 +68,13 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="green darken-1" flat="flat" @click="activarDesactivarCerrar">
+                            <v-btn color="green darken-1"  @click="activarDesactivarCerrar">
                                 Cancelar
                             </v-btn>
-                            <v-btn v-if="adAccion==1" color="orange darken-4" flat="flat" @click="activar">
+                            <v-btn v-if="adAccion==1" color="orange darken-4"  @click="activar">
                                 Activar
                             </v-btn>
-                            <v-btn v-if="adAccion==2" color="orange darken-4" flat="flat" @click="desactivar">
+                            <v-btn v-if="adAccion==2" color="orange darken-4"  @click="desactivar">
                                 Desactivar
                             </v-btn>
                         </v-card-actions>
@@ -99,7 +85,7 @@
 
             <v-data-table
                 :headers="headers"
-                :items="cuentas"
+                :items="cuentassalidas"
                 :search="search"
                 class="elevation-1">
                 <template v-slot:[`item.opciones`]="{ item }">
@@ -165,18 +151,14 @@
     export default {
         data(){
             return {
-                cuentas: [],
+                cuentassalidas: [],
                 dialog: false,
                 headers: [
                     { text: 'Opciones', value: 'opciones'  } ,
                     { text: 'Cuenta', value: 'cuenta', sortable: false},
-                    { text: 'Nombre', value: 'nombre', sortable: false },
                     { text: 'Banco', value: 'banco', sortable: false },
                     { text: 'Moneda', value: 'moneda', sortable: false },
-                    { text: 'Correo', value: 'correo', sortable: false },
                     { text: 'Descripcion', value: 'descripcion', sortable: false },
-                    { text: 'Es empleado', value: 'esempleado', sortable: false },
-                    { text: 'Creador', value: 'usuario', sortable: false },
                     { text: 'Estado', value: 'condicion' }
                     ],
                 search: '',
@@ -187,12 +169,7 @@
                 idmoneda:'',
                 monedas:[],
                 cuenta: '',
-                nombre: '',
-                correo:'',
                 descripcion: '',
-                esempleado: false,
-                idusuario: this.$store.state.usuario.idusuario,
-                usuario: this.$store.state.usuario.nombre,
                 valida: 0,
                 validaMensaje:[],
                 adModal: 0,
@@ -222,10 +199,10 @@
 
             listar(){
                 let me=this;
-                axios.get('api/Cuentas/Listar').then(function(response)
+                axios.get('api/Cuentasalidas/Listar').then(function(response)
                 {
                     //console.log(response);
-                    me.cuentas=response.data;
+                    me.cuentassalidas=response.data;
                 }).catch(function(error){
                     console.log(error);
                 });
@@ -260,16 +237,11 @@
 
            
             editItem (item) {
-                this.id=item.idcuenta;
+                this.id=item.idcuentasalida;
                 this.idbanco=item.idbanco;
                 this.idmoneda=item.idmoneda;
                 this.cuenta=item.cuenta;
-                this.nombre=item.nombre;
-                this.correo=item.correo;
                 this.descripcion=item.descripcion;
-                this.esempleado=item.esempleado;
-                this.idusuario=item.idusuario;
-                this.usuario=item.usuario;
                 this.editedIndex=1;
                 this.dialog = true
             },
@@ -290,13 +262,9 @@
                 this.idbanco="";
                 this.idmoneda="";
                 this.cuenta="";
-                this.nombre="";
                 this.descripcion="";
                 this.esempleado="";
-                this.idusuario= this.$store.state.usuario.idusuario;
-                this.usuario= this.$store.state.usuario.nombre;
                 this.editedIndex=-1;
-                this.dias=1;
             },
 
             guardar(){
@@ -306,15 +274,12 @@
                 if (this.editedIndex > -1) {
                     //codigo para editar
                     let me=this;
-                    axios.put('api/Cuentas/Actualizar',{
-                        'idcuenta':me.id,
+                    axios.put('api/Cuentasalidas/Actualizar',{
+                        'idcuentasalida':me.id,
                         'idbanco':me.idbanco,
                         'idmoneda':me.idmoneda,
                         'cuenta':me.cuenta,
-                        'nombre':me.nombre,
-                        'correo':me.correo,
                         'descripcion':me.descripcion,
-                        'esempleado':me.esempleado
                     }).then(function(response){            
                         me.close();
                         me.listar();
@@ -326,15 +291,11 @@
                 else {
                     //codigo para guardar
                     let me=this;
-                    axios.post('api/Cuentas/Crear',{
+                    axios.post('api/Cuentasalidas/Crear',{
                         'idbanco':me.idbanco,
                         'idmoneda':me.idmoneda,
                         'cuenta':me.cuenta,
-                        'nombre':me.nombre,
-                        'correo':me.correo,
                         'descripcion':me.descripcion,
-                        'esempleado':me.esempleado,
-                        'idusuario':me.idusuario,
                     }).then(function(response){            
                         me.close();
                         me.listar();
@@ -349,20 +310,14 @@
             validar(){
                 this.valida=0;
                 this.validaMensaje=[];
-                if(this.nombre.length<3 || this.nombre.length>50){
-                    this.validaMensaje.push("El nombre debe tener mas de 3 caracteres y menos de 50 caracteres.")
-                }
-                if(this.correo.length<3 || this.nombre.length>50){
-                    this.validaMensaje.push("Debe ingresar un correo.")
+                if(this.cuenta.length<3 || this.cuenta.length>50){
+                    this.validaMensaje.push("La cuenta debe tener mas de 3 caracteres y menos de 50 caracteres.")
                 }
                 if(!this.idbanco){
                     this.validaMensaje.push("Seleccione un banco.")
                 }
                 if(!this.idmoneda){
                     this.validaMensaje.push("Seleccione una moneda.")
-                }
-                if(this.cuenta.length<3 || this.cuenta.length>50){
-                    this.validaMensaje.push("la cuenta debe contener mas de 3 caracteres.")
                 }
                 if(this.validaMensaje.length){
                     this.valida=1;
@@ -373,7 +328,7 @@
             activarDesactivarMostrar(accion,item){
                 this.adModal=1;
                 this.adNombre=item.nombre;
-                this.adId=item.idcuenta;
+                this.adId=item.idcuentasalida;
                 if (accion==1){
                     this.adAccion=1;
 
@@ -392,7 +347,7 @@
 
             activar(){
                 let me=this;
-                axios.put('api/Cuentas/Activar/'+this.adId,{}).then(function(response){            
+                axios.put('api/Cuentasalidas/Activar/'+this.adId,{}).then(function(response){            
                     me.adModal=0;
                     me.adAccion=0;
                     me.adNombre="";
@@ -405,7 +360,7 @@
 
             desactivar(){
                 let me=this;
-                axios.put('api/Cuentas/Desactivar/'+this.adId,{}).then(function(response){            
+                axios.put('api/Cuentasalidas/Desactivar/'+this.adId,{}).then(function(response){            
                     me.adModal=0;
                     me.adAccion=0;
                     me.adNombre="";
