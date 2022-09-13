@@ -81,6 +81,7 @@ namespace Sistema.Entidades.Solicitud
 
         public ICollection<Detalleorden> detalleorden { get; set; }
         public ICollection<Op_cargado> op_cargado { get; set; }
+        public ICollection<Op_confirmado> op_confirmado { get; set; }
 
     }
 }
