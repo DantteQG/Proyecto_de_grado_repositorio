@@ -65,8 +65,8 @@
             
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" flat @click.native="close">Cancelar</v-btn>
-                            <v-btn color="blue darken-1" flat @click.native="guardar">Guardar</v-btn>
+                            <v-btn color="blue darken-1" @click.native="close">Cancelar</v-btn>
+                            <v-btn color="blue darken-1" @click.native="guardar">Guardar</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
@@ -82,13 +82,13 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="green darken-1" flat="flat" @click="activarDesactivarCerrar">
+                            <v-btn color="green darken-1" @click="activarDesactivarCerrar">
                                 Cancelar
                             </v-btn>
-                            <v-btn v-if="adAccion==1" color="orange darken-4" flat="flat" @click="activar">
+                            <v-btn v-if="adAccion==1" color="orange darken-4" @click="activar">
                                 Activar
                             </v-btn>
-                            <v-btn v-if="adAccion==2" color="orange darken-4" flat="flat" @click="desactivar">
+                            <v-btn v-if="adAccion==2" color="orange darken-4" @click="desactivar">
                                 Desactivar
                             </v-btn>
                         </v-card-actions>
@@ -128,7 +128,7 @@
                 <template slot="items" slot-scope="props">
                     <td>{{ props.item.cuenta }}</td>
                     <td>{{ props.item.nombre }}</td>
-                    <td>{{ props.item.banco }}</td>
+                    <td>{{ props.item.alias }}</td>
                     <td>{{ props.item.moneda }}</td>
                     <td>{{ props.item.correo }}</td>
                     <td>{{ props.item.descripcion }}</td>
@@ -291,6 +291,7 @@
                 this.idmoneda="";
                 this.cuenta="";
                 this.nombre="";
+                this.correo="";
                 this.descripcion="";
                 this.esempleado="";
                 this.idusuario= this.$store.state.usuario.idusuario;
@@ -351,9 +352,6 @@
                 this.validaMensaje=[];
                 if(this.nombre.length<3 || this.nombre.length>50){
                     this.validaMensaje.push("El nombre debe tener mas de 3 caracteres y menos de 50 caracteres.")
-                }
-                if(this.correo.length<3 || this.nombre.length>50){
-                    this.validaMensaje.push("Debe ingresar un correo.")
                 }
                 if(!this.idbanco){
                     this.validaMensaje.push("Seleccione un banco.")

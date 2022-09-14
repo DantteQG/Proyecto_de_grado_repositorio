@@ -35,7 +35,7 @@ namespace Sistema.Web.Controllers
             {
                 idcuenta = c.idcuenta,
                 idbanco = c.idbanco,
-                banco = c.banco.nombre,
+                banco = c.banco.alias,
                 idmoneda = c.idmoneda,
                 moneda = c.moneda.nombre,
                 cuenta = c.cuenta,
@@ -162,7 +162,7 @@ namespace Sistema.Web.Controllers
                 nombre = model.nombre,
                 correo = model.correo,
                 descripcion = model.descripcion,
-                esempleado = true,
+                esempleado = model.esempleado,
                 condicion = true,
                 idusuario = model.idusuario,
 
