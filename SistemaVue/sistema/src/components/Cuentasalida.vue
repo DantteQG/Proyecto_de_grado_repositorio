@@ -1,7 +1,7 @@
 <template>
     <v-layout align-start>
         <v-flex>
-            <v-toolbar  color="white">
+            <v-toolbar flat color="white">
                 <v-toolbar-title>Cuentas salidas bancarias</v-toolbar-title>
                 <v-divider
                 class="mx-2"

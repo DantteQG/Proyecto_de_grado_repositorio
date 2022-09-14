@@ -34,7 +34,7 @@ namespace Sistema.Web.Controllers
             {
                 idcuentasalida = cs.idcuentasalida,
                 idbanco = cs.idbanco,
-                banco = cs.banco.nombre,
+                banco = cs.banco.alias,
                 idmoneda = cs.idmoneda,
                 moneda = cs.moneda.nombre,
                 cuenta = cs.cuenta,
