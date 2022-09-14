@@ -26,7 +26,7 @@
             <v-list-item slot="activator">
               <v-list-item-content>
                 <v-list-item-title>
-                  Administracion
+                  ADMINISTRACION
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -167,7 +167,7 @@
             <v-list-item slot="activator">
               <v-list-item-content>
                 <v-list-item-title>
-                  Usuarios
+                  USUARIOS
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -199,7 +199,7 @@
             <v-list-item slot="activator">
               <v-list-item-content>
                 <v-list-item-title>
-                  Cuentas
+                  CUENTAS
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -233,7 +233,7 @@
             <v-list-item slot="activator">
               <v-list-item-content>
                 <v-list-item-title>
-                  Solicitudes
+                  SOLICITUDES
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -294,7 +294,7 @@
             <v-list-item slot="activator">
               <v-list-item-content>
                 <v-list-item-title>
-                  Tesoreria
+                  TESORERIA
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -335,7 +335,7 @@
             <v-list-item slot="activator">
               <v-list-item-content>
                 <v-list-item-title>
-                  Contabilidad
+                  CONTABILIDAD
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
