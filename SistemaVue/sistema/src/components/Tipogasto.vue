@@ -46,12 +46,12 @@
             
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" flat @click.native="close">Cancelar</v-btn>
-                            <v-btn color="blue darken-1" flat @click.native="guardar">Guardar</v-btn>
+                            <v-btn color="blue darken-1" @click.native="close">Cancelar</v-btn>
+                            <v-btn color="blue darken-1" @click.native="guardar">Guardar</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
-                <v-dialog v-model="adModal" max-width="290">
+                <v-dialog v-model="adModal" max-width="350">
                     <v-card>
                         <v-card-title class="headline" v-if="adAccion==1">¿Activar Item?</v-card-title>
                         <v-card-title class="headline" v-if="adAccion==2">¿Desactivar Item?</v-card-title>
@@ -63,13 +63,13 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="green darken-1" flat="flat" @click="activarDesactivarCerrar">
+                            <v-btn color="green darken-1" @click="activarDesactivarCerrar">
                                 Cancelar
                             </v-btn>
-                            <v-btn v-if="adAccion==1" color="orange darken-4" flat="flat" @click="activar">
+                            <v-btn v-if="adAccion==1" color="orange darken-4" @click="activar">
                                 Activar
                             </v-btn>
-                            <v-btn v-if="adAccion==2" color="orange darken-4" flat="flat" @click="desactivar">
+                            <v-btn v-if="adAccion==2" color="orange darken-4" @click="desactivar">
                                 Desactivar
                             </v-btn>
                         </v-card-actions>
