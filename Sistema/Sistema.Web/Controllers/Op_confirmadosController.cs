@@ -31,12 +31,11 @@ namespace Sistema.Web.Controllers
             {
                 return BadRequest(ModelState);
             }
-            DateTime fecha = DateTime.Now;
-
+            
             Op_confirmado op_confirmado = new Op_confirmado
             {
                 idordendepago = model.idordendepago,
-                fecha = fecha
+                fecha = model.fecha
             };
 
             _context.Op_confirmados.Add(op_confirmado);
@@ -56,7 +55,7 @@ namespace Sistema.Web.Controllers
 
         private bool Op_confirmadoExists(int id)
         {
-            return _context.op_Confirmados.Any(e => e.idconfirmado == id);
+            return _context.Op_confirmados.Any(e => e.idconfirmado == id);
         }
     }
 }
