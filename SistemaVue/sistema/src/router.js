@@ -23,6 +23,7 @@ import Ordendepago from './components/Ordendepago.vue'
 import Poraprobar from './components/Poraprobar.vue'
 import Enviadosparticipados from './components/Enviadosparticipados.vue'
 import Porcargar from './components/Porcargar.vue'
+import Porconfirmar from './components/Porconfirmar.vue'
 import Cuentasalida from './components/Cuentasalida.vue'
 
 
