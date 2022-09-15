@@ -302,7 +302,7 @@ namespace Sistema.Web.Controllers
             });
         }
 
-        // GET: api/Ordendepagos/EnviadosParticipados/1
+        // GET: api/Ordendepagos/Porestado/1
         [HttpGet("[action]/{id}")]
         public async Task<IEnumerable<OrdendepagoViewModel>> Porestado([FromRoute] int id)
         {

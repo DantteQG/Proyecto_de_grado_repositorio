@@ -1,9 +1,9 @@
 <template>
     <v-layout align-start>
         <v-flex>
-            <v-container  v-if="verOrdenpago==0">
+            <v-container v-if="verOrdenpago==0">
                 <v-toolbar flat color="white">
-                    <v-toolbar-title>Orden de pago por cargar</v-toolbar-title>
+                    <v-toolbar-title>Concluidas</v-toolbar-title>
                     <v-divider
                     class="mx-2"
                     inset
@@ -147,19 +147,11 @@
                             rows="3" row-height="25" class="mt-4"></v-textarea> 
                     </v-row>
                     <v-container>
-                        <v-btn color="blue darken-1" @click="agregarDetalle">+</v-btn>
                         <v-data-table
                             :headers="cabeceraDetalles"
                             :items="detalles"
                             hide-default-footer
                             class="elevation-2">
-                            <template v-slot:[`item.borrar`]="{ item }">
-                                <td class=" justify-center layout px-0">
-                                    <v-icon small class="mr-2" @click="eliminardetalle(detalles,item)">
-                                        delete
-                                    </v-icon>
-                                </td>
-                            </template>
                             <template v-slot:[`item.detalle`]="props">
                                 <td><v-text-field v-model="props.item.detalle"></v-text-field></td>
                             </template>
@@ -196,73 +188,12 @@
                         </v-flex>
                         <v-row>
                             <v-spacer></v-spacer>
-                            <v-btn class="mt-2 mr-10" color="blue darken-1" @click="MostrarCargabanco" >Cargar banco</v-btn>
-                            <v-btn class="mt-2 mr-10" color="red darken-1" @click="cargaBanco(0)" >Rechazar</v-btn>
                             <v-btn class="mt-2" color="primary" @click="volver">Volver</v-btn>
                             <v-spacer></v-spacer>
-                        </v-row >
-                        <v-dialog v-model="dialog" max-width="500px">
-                            <v-card>
-                                <v-card-title>
-                                <span class="headline">{{ formTitle}}</span>
-                                </v-card-title>
-                                <v-card-text>hola</v-card-text>
-                                <v-card-actions>
-                                    <v-spacer></v-spacer>
-                                    <v-btn @click.native="close" rounded block elevation="10" color="blue" dark class="mb-3">Cerrar</v-btn>
-                                    <v-spacer></v-spacer>
-                                </v-card-actions>
-                            </v-card>
-                        </v-dialog>
-                        <v-dialog v-model="dialogAprobador" max-width="500px">
-                            <v-card>
-                                <v-card-title>
-                                <span class="headline">Se ha modificado el aprobador</span>
-                                </v-card-title>
-                                <v-card-text>
-                                hola
-                                </v-card-text>
-                                <v-card-actions>
-                                    <v-spacer></v-spacer>
-                                    <v-btn  @click.native="close" rounded block elevation="10" color="blue" dark class="mb-3">Cerrar</v-btn>
-                                    <v-spacer></v-spacer>
-                                </v-card-actions>
-                            </v-card>
-                        </v-dialog>                  
+                        </v-row >                 
                     </v-container>
                 </template>
-                <v-flex xs12 sm12 md12 v-show="valida">
-                    <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v">
-                    </div>
-                </v-flex>
             </v-container>
-            <v-dialog v-model="dialoglote" max-width="500px">
-                <v-card>
-                    <v-card-title>
-                        <span class="headline">Cargar banco solicitud: {{id}}</span>
-                    </v-card-title>
-        
-                    <v-card-text>
-                        <v-container grid-list-md>
-                            <v-layout wrap>
-                                <v-flex xs12 sm12 md50>
-                                        <v-select v-model="idcuentasalida" 
-                                        :items="cuentasalidas" label="Banco"></v-select>
-                                    </v-flex>
-                                    <v-flex xs12 sm12 md12>
-                                        <v-text-field v-model="lote" label="lote"></v-text-field>
-                                    </v-flex>
-                            </v-layout>
-                        </v-container>
-                    </v-card-text>
-        
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1"  @click.native="cerrardialoglote">Cancelar</v-btn>
-                        <v-btn color="blue darken-1"  @click.native="cargaBanco(1)">Guardar</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
         </v-flex>
     </v-layout>
 </template>
@@ -273,8 +204,6 @@
         data(){
             return {
                 ordendepagos: [],
-                dialog: false,
-                dialogAprobador:false,
                 headers: [                    
                     { text: 'CASO', value: 'idordendepago'},
                     { text: 'Opciones', value: 'opciones'  } ,
@@ -296,13 +225,11 @@
                     ],
                 detalles:[],
                 cabeceraDetalles: [
-                    { text: 'Borrar', value: 'borrar', sortable: false } ,
                     { text: 'Detalle', value: 'detalle' },
                     { text: 'Nro Documento', value: 'nrodocumento' },
                     { text: 'Monto', value: 'monto' },
                 ],    
                 search: '',
-                editedIndex: -1,
                 id:'',
                 Areas:[],
                 Regionales:[],
@@ -345,7 +272,6 @@
                 monto:0,
                 total:0,
                 searchcuentas: null,
-                codigobanco:'',
                 idaddespgasto:'',
                 diaGastos:[],
                 adiddetalles:'',
@@ -353,17 +279,9 @@
                 menu: false,
                 modal: false,
                 menu2: false,
-
-                dialoglote:false,
-                cuentasalidas:[],
-                idcuentasalida:'',
-                lote:''
             }
         },
         computed: {
-             formTitle () {
-            return this.editedIndex === -1 ? 'La solicitud ha sido Cargada ' : 'La solicitud ha sido rechazada'
-            },
             calcularTotal:function(){
                 var resultado=0.0;
                 for(var i=0;i<this.detalles.length;i++){
@@ -374,15 +292,11 @@
             }
         },
 
-        watch: {
-            dialog (val) {
-            val || this.close()
-            }
+        watch: {      
         },
 
         created () {           
             this.listar();
-            this.Select();
         },
         methods:{
 
@@ -390,7 +304,7 @@
                 var adidusuario=this.$store.state.usuario.idusuario;
                 let me=this;
 
-                axios.get('api/Ordendepagos/Porestado/2').then(function(response)
+                axios.get('api/Ordendepagos/Porestado/4').then(function(response)
                 {
                     //console.log(response);
                     me.ordendepagos=response.data;
@@ -516,7 +430,6 @@
                     CuentasArray.map(function(x){
                         me.Cuentas.push({text: x.cuenta+' - '+x.nombre+' - '+x.banco,value:x.idcuenta});
                     });
-                    //me.codigobanco=Cuentas.text2;
                 }).catch(function(error){
                     console.log(error);
                 });
@@ -546,20 +459,6 @@
                 }).catch(function(error){
                     console.log(error);
                 });
-
-                var CuentasalidasArray=[];
-         
-                axios.get('api/Cuentasalidas/Select').then(function(response)
-                {
-                    //console.log(response);
-                    CuentasalidasArray=response.data;
-                    CuentasalidasArray.map(function(x){
-                        me.cuentasalidas.push({text: x.moneda+' - '+x.cuenta+' - '+x.banco,value:x.idcuentasalida});
-                    });
-                    //me.codigobanco=Cuentas.text2;
-                }).catch(function(error){
-                    console.log(error);
-                });
                      
             },
 
@@ -581,23 +480,8 @@
                 });
             },
 
-           agregarDetalle(){
-               this.detalles.push(
-                   {detalle: "",nrodocumento:"",monto:0
-                   }
-               );
-            },
-
-            eliminardetalle(arr,item){
-                var i=arr.indexOf(item);
-                if(i!==-1){
-                    arr.splice(i,1)
-                }
-            },
-
             volver(){
                 this.verOrdenpago=0;
-                this.validaMensaje=[];
             },
 
             convertirnumero(){
@@ -608,7 +492,6 @@
 
            
             editItem (item) {
-                this.validaMensaje=[];
                 this.verOrdenpago=1;
                 this.id=item.idordendepago;
                 this.idusuario=item.idusuario;
@@ -626,7 +509,6 @@
                 this.idproyecto=item.idproyecto;
                 this.factura=item.factura;
                 this.recibo=item.recibo;
-                this.editedIndex=1;
                 this.concepto=item.concepto;
                 this.idcuenta=item.idcuenta;
                 this.idaprobador=item.idaprobador;
@@ -639,172 +521,9 @@
             },
 
             close () {
-                this.dialogAprobador=false;
-                this.dialog = false;
                 this.volver();
                 this.listar();
-                this.editedIndex=-1;
-            },
-
-            MostrarCargabanco(){
-                this.dialoglote=1;
-            },
-            cerrardialoglote(){
-                this.dialoglote=0;
-                this.lote='';
-                this.idcuentasalida='';
-            },
-
-            cargaBanco(estado){
-                this.convertirnumero();
-                
-                let me=this;
-                me.total=me.total*1
-                if(estado==1)
-                {  
-                    if(this.validar()){
-                        return;
-                    }
-                    axios.put('api/Ordendepagos/Actualizar',{
-                        'idordendepago':me.id,
-                        'idestado':3,
-                        'idusuario':me.idusuario,
-                        'idaprobador':me.idaprobador,
-                        'idcontador':me.idcontador,
-                        'idregional':me.idregional,
-                        'idarea':me.idarea,
-                        'idempresa':me.idempresa,
-                        'idespecifgasto':me.idespecifgasto,
-                        'idmoneda':me.idmoneda,
-                        'idtiposolicitud':me.idtiposolicitud,
-                        'idmodopago':me.idmodopago,
-                        'idproyecto':me.idproyecto,
-                        'idcuenta':me.idcuenta,
-                        'fechaprogramada':me.fechaprogramada,
-                        'factura':me.factura,
-                        'recibo':me.recibo,
-                        'concepto':me.concepto,
-                        'total':me.total,
-                        'detalleorden':me.detalles
-                    })
-                    axios.post('api/Op_cargados/Crear',{
-                        'idordendepago':me.id,
-                        'idcuentasalida':me.idcuentasalida,
-                        'lote':me.lote
-                    }).then(function(response){            
-                        me.dialog=true;
-                        me.editedIndex=-1;
-                        me.cerrardialoglote();
-                        me.validaMensaje=[];       
-                    }).catch(function(error){
-                        console.log(error);
-                    })
-                }
-                if(estado==0)
-                {
-                    this.adId=me.id;
-                    axios.put('api/Ordendepagos/Rechazar/'+this.adId,{
-                    }).then(function(response){            
-                        me.dialog=true;
-                        me.editedIndex=1;
-                            
-                    }).catch(function(error){
-                        console.log(error);
-                    })
-                }
-            },
-
-            cambiarAprobador(){
-                let me=this;
-                axios.put('api/Ordendepagos/Cambiaraprobador',{
-                        'idordendepago':me.id,
-                        'idaprobador':me.idaprobador,
-                    }).then(function(response){            
-                        me.dialogAprobador=true;
-                        me.validaMensaje=[];        
-                    }).catch(function(error){
-                        console.log(error);
-                    })
-            },
-
-            verDialog(){
-                this.dialog=true;
-            },
-            validar(){
-                this.valida=0;
-                this.validaMensaje=[];
-                if(!this.idarea){
-                    this.validaMensaje.push("Seleccione un area.")
-                }
-                if(!this.idregional){
-                    this.validaMensaje.push("Seleccione un regional.")
-                }
-                if(!this.idempresa){
-                    this.validaMensaje.push("Seleccione una empresa.")
-                }
-                if(!this.idtipogasto){
-                    this.validaMensaje.push("Seleccione un tipo de gasto.")
-                }
-                if(!this.idespecifgasto){
-                    this.validaMensaje.push("Seleccione una especificacion de gasto.")
-                }
-                if(!this.idtiposolicitud){
-                    this.validaMensaje.push("Seleccione un tipo de solicitud.")
-                }
-                if(!this.idmoneda){
-                    this.validaMensaje.push("Seleccione moneda.")
-                }
-                if(!this.idmodopago){
-                    this.validaMensaje.push("Seleccione un modo de pago.")
-                }
-                if(!this.idcuenta){
-                    this.validaMensaje.push("Seleccione una cuenta.")
-                }
-                if(this.concepto.length<3 || this.concepto.length>256){
-                    this.validaMensaje.push("Escriba el concepto en menos de 256 caracteres.")
-                }
-                if(!this.idaprobador){
-                    this.validaMensaje.push("Seleccione un aprobador.")
-                }
-                if(this.total==0){
-                    this.validaMensaje.push("debe agregar detalles")
-                }
-                
-                for(var i=0;i<this.detalles.length;i++){
-                    if(this.detalles[i].monto==0){
-                        this.validaMensaje.push("los importes no deben ser igual a 0.");
-                    }
-                }
-                for(var i=0;i<this.detalles.length;i++){
-                    if(this.detalles[i].detalle==""){
-                        this.validaMensaje.push("falta detalle(s).");
-                    }
-                } 
-
-                if(this.validaMensaje.length){
-                    this.valida=1;
-                }
-               
-                return this.valida;
-            },
-
-            activarDesactivarMostrar(accion,item){
-                this.adModal=1;
-                this.adNombre=item.nombre;
-                this.adId=item.idcuenta;
-                if (accion==1){
-                    this.adAccion=1;
-
-                }
-                else if(accion==2){
-                    this.adAccion=2;
-                }
-                else{
-                    this.adModal=0;
-                }
-            },
-
-          
+            },       
         }        
     }
 </script>

@@ -22,6 +22,7 @@ import store from './store'
 import Ordendepago from './components/Ordendepago.vue'
 import Poraprobar from './components/Poraprobar.vue'
 import Enviadosparticipados from './components/Enviadosparticipados.vue'
+import Concluidas from './components/Concluidas.vue'
 import Porcargar from './components/Porcargar.vue'
 import Porconfirmar from './components/Porconfirmar.vue'
 import Cuentasalida from './components/Cuentasalida.vue'
@@ -231,6 +232,19 @@ var router = new Router({
       path: '/enviadosparticipados',
       name: 'enviadosparticipados',
       component: Enviadosparticipados,
+      meta: {
+        administrador: true,
+        iniciador: true,
+        aprobador: true,
+        creadorcuenta:true,
+        tesoreria: true,
+        contador:true
+      }
+    },
+    {
+      path: '/concluidas',
+      name: 'concluidas',
+      component: Concluidas,
       meta: {
         administrador: true,
         iniciador: true,
