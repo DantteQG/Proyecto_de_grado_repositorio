@@ -58,8 +58,8 @@
             
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" flat @click.native="close">Cancelar</v-btn>
-                            <v-btn color="blue darken-1" flat @click.native="guardar">Guardar</v-btn>
+                            <v-btn color="blue darken-1" @click.native="close">Cancelar</v-btn>
+                            <v-btn color="blue darken-1" @click.native="guardar">Guardar</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
@@ -75,13 +75,13 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="green darken-1" flat="flat" @click="activarDesactivarCerrar">
+                            <v-btn color="green darken-1" @click="activarDesactivarCerrar">
                                 Cancelar
                             </v-btn>
-                            <v-btn v-if="adAccion==1" color="orange darken-4" flat="flat" @click="activar">
+                            <v-btn v-if="adAccion==1" color="orange darken-4" @click="activar">
                                 Activar
                             </v-btn>
-                            <v-btn v-if="adAccion==2" color="orange darken-4" flat="flat" @click="desactivar">
+                            <v-btn v-if="adAccion==2" color="orange darken-4" @click="desactivar">
                                 Desactivar
                             </v-btn>
                         </v-card-actions>
