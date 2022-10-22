@@ -247,9 +247,6 @@ var router = new Router({
       component: Concluidas,
       meta: {
         administrador: true,
-        iniciador: true,
-        aprobador: true,
-        creadorcuenta:true,
         tesoreria: true,
         contador:true
       }

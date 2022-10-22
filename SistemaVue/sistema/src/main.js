@@ -10,7 +10,7 @@ Vue.prototype.moment = moment
 
 Vue.config.productionTip = false
 
-axios.defaults.baseURL='http://localhost:5133/'
+axios.defaults.baseURL='https://localhost:44365/'
 
 new Vue({
   router,

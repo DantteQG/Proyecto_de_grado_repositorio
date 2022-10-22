@@ -267,26 +267,6 @@
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'concluidas'}">
-              <v-list-item-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>
-                  Solicitudes concluidas
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item :to="{ name: ''}">
-              <v-list-item-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>
-                  Solicitudes Rechazadas
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
           </v-list-group>
         </template>
         <template v-if="esAdministrador || esTesoreria">

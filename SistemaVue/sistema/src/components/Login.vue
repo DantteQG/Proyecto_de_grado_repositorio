@@ -1,6 +1,6 @@
 <template>
     <v-layout aling-center justify-center>
-        <v-flex sx12 sm8 md 6 lg5 x14>
+        <v-flex sx12 sm8 md>
             <v-card>
                 <div class="layout column align-center">
                   <img src="static/logo.png" alt="Vue Material Admin" width="180" height="180">
@@ -65,7 +65,7 @@ export default {
                 {
                     this.error="Ocurrió un error"
                 }
-                //console.log(err)
+                console.log(err)
             })
 
         }
