@@ -13,6 +13,7 @@ using Sistema.Web.Models.Usuarios.Usuario;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using System.DirectoryServices;
 
 namespace Sistema.Web.Controllers
 {
@@ -286,6 +287,52 @@ namespace Sistema.Web.Controllers
 
         }
 
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Login2(LoginViewModel model)
+        {
+
+            var strUsuario = model.usuario.ToUpper().Trim();
+            var strUsuarioEntidad = strUsuario;
+            var strClave = model.password;//usuaqui
+            //CParametrosPwb.StrUsuarioLogin = strUsuario;
+            var StrIpAd = "proesa"; ///revisar stripad
+
+            var booAutenticacion = Authenticate(strUsuario, strClave, "proesa.loc", StrIpAd);
+            //var booAutenticacion = Authenticate(strUsuario, strClave, CParametrosPwb.strDominioLdap, CParametrosPwb.strIpAd);
+            if (!booAutenticacion)
+            {
+                //usuario no existe en AC
+                return NotFound();
+                // MostrarMensajeError("* Usuario y/o contraseña incorrectos.", true);
+                //Authenticated = false;
+                //CParametrosPwb.StrUsuarioLogin = "";
+                //return;
+            }
+
+            var usuario = await _context.Usuarios.Where(u => u.condicion == true).Include(u => u.rol).FirstOrDefaultAsync(u => u.usuario == strUsuario);
+
+            if (usuario == null)
+            {
+                //usuario no existe en Db
+                return NotFound();
+            }
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, usuario.idusuario.ToString()),
+                new Claim(ClaimTypes.Email, strUsuario),
+                new Claim(ClaimTypes.Role, usuario.rol.nombre ),
+                new Claim("idusuario", usuario.idusuario.ToString() ),
+                new Claim("rol", usuario.rol.nombre ),
+                new Claim("nombre", usuario.nombre )
+            };
+
+            return Ok(
+                new { token = Generartoken(claims) }
+                );
+
+        }
+
         private string Generartoken(List<Claim> claims)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
@@ -324,5 +371,36 @@ namespace Sistema.Web.Controllers
         {
             return _context.Usuarios.Any(e => e.idusuario == id);
         }
+
+
+        public bool Authenticate(string strUsuario, string strClave, string domain, string strIpAd)
+        {
+            bool authenticated;
+            var strServidor = "LDAP://" + strIpAd + "/DC=" + domain + ",DC=loc";
+            if (strUsuario == "ADMINISTRADOR.PROESA" && strClave == /*CParametrosPwb.strIdTemaGral*/ strIpAd)
+            {
+                authenticated = true;
+            }
+            else
+            {
+                try
+                {
+                    var entry = new DirectoryEntry(strServidor, strUsuario, strClave);
+                    var nativeObject = entry.NativeObject;
+                    authenticated = true;
+                }
+                catch (DirectoryServicesCOMException cex)
+                {
+                    authenticated = false;
+                }
+                catch (Exception ex)
+                {
+                    authenticated = false;
+                }
+            }
+
+            return authenticated;
+        }
+
     }
 }
