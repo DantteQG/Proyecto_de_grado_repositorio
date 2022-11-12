@@ -11,6 +11,8 @@ namespace Sistema.Web.Models.Administracion.Cuentasalida
         [Required]
         public int idcuentasalida { get; set; }
         [Required]
+        public int idempresa { get; set; }
+        [Required]
         public int idbanco { get; set; }
         [Required]
         public int idmoneda { get; set; }

@@ -27,12 +27,15 @@ namespace Sistema.Web.Controllers
         public async Task<IEnumerable<CuentasalidaViewModel>> Listar()
         {
             var cuentasalida = await _context.Cuentasalidas
+                .Include(cs =>cs.empresa)
                 .Include(cs => cs.banco)
                 .Include(cs => cs.moneda).ToListAsync();
 
             return cuentasalida.Select(cs => new CuentasalidaViewModel
             {
                 idcuentasalida = cs.idcuentasalida,
+                idempresa = cs.idempresa,
+                empresa = cs.empresa.nombre,
                 idbanco = cs.idbanco,
                 banco = cs.banco.alias,
                 idmoneda = cs.idmoneda,
@@ -48,6 +51,7 @@ namespace Sistema.Web.Controllers
         public async Task<IEnumerable<SelectViewModel>> Select()
         {
             var cuentasalida = await _context.Cuentasalidas
+                .Include(cs => cs.empresa)
                 .Include(cs => cs.banco)
                 .Include(cs => cs.moneda)
                 .Where(cs => cs.condicion == true).ToListAsync();
@@ -55,6 +59,7 @@ namespace Sistema.Web.Controllers
             return cuentasalida.Select(cs => new SelectViewModel
             {
                 idcuentasalida = cs.idcuentasalida,
+                empresa = cs.empresa.nombre,
                 banco = cs.banco.alias,
                 moneda = cs.moneda.nombre,
                 cuenta = cs.cuenta
@@ -84,7 +89,7 @@ namespace Sistema.Web.Controllers
             {
                 return NotFound();
             }
-
+            cuenta.idempresa = model.idempresa;
             cuenta.idbanco = model.idbanco;
             cuenta.idmoneda = model.idmoneda;
             cuenta.cuenta = model.cuenta;
@@ -115,6 +120,7 @@ namespace Sistema.Web.Controllers
 
             Cuentasalida cuentasalida = new Cuentasalida
             {
+                idempresa = model.idempresa,
                 idbanco = model.idbanco,
                 idmoneda = model.idmoneda,
                 cuenta = model.cuenta,
