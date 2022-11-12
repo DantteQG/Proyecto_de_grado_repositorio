@@ -12,7 +12,9 @@ namespace Sistema.Entidades.Administracion
     public class Cuentasalida
     {
         public int idcuentasalida { get; set; }
-
+        [Required]
+        [ForeignKey("banco")]
+        public int idempresa { get; set; }
         [Required]
         [ForeignKey("banco")]
         public int idbanco { get; set; }
@@ -26,6 +28,7 @@ namespace Sistema.Entidades.Administracion
 
         public Banco banco { get; set; }
         public Moneda moneda { get; set; }
+        public Empresa empresa { get; set; }
 
 
 

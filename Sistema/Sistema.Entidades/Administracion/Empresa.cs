@@ -17,6 +17,7 @@ namespace Sistema.Entidades.Administracion
         public bool condicion { get; set; }
 
         public ICollection<Ordendepago> ordendepago { get; set; }
+        public ICollection<Empresa> empresa { get; set; }
 
     }
 }
