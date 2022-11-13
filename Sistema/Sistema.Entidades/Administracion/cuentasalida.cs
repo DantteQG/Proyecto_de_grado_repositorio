@@ -13,7 +13,7 @@ namespace Sistema.Entidades.Administracion
     {
         public int idcuentasalida { get; set; }
         [Required]
-        [ForeignKey("banco")]
+        [ForeignKey("empresa")]
         public int idempresa { get; set; }
         [Required]
         [ForeignKey("banco")]

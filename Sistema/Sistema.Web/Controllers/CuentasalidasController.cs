@@ -27,7 +27,7 @@ namespace Sistema.Web.Controllers
         public async Task<IEnumerable<CuentasalidaViewModel>> Listar()
         {
             var cuentasalida = await _context.Cuentasalidas
-                .Include(cs =>cs.empresa)
+                .Include(cs => cs.empresa)
                 .Include(cs => cs.banco)
                 .Include(cs => cs.moneda).ToListAsync();
 
@@ -82,18 +82,18 @@ namespace Sistema.Web.Controllers
                 return BadRequest();
             }
 
-            var cuenta = await _context.Cuentasalidas.FirstOrDefaultAsync(c => c.idcuentasalida == model.idcuentasalida);
+            var cuentasalida = await _context.Cuentasalidas.FirstOrDefaultAsync(c => c.idcuentasalida == model.idcuentasalida);
 
 
-            if (cuenta == null)
+            if (cuentasalida == null)
             {
                 return NotFound();
             }
-            cuenta.idempresa = model.idempresa;
-            cuenta.idbanco = model.idbanco;
-            cuenta.idmoneda = model.idmoneda;
-            cuenta.cuenta = model.cuenta;
-            cuenta.descripcion = model.descripcion;
+            cuentasalida.idempresa = model.idempresa;
+            cuentasalida.idbanco = model.idbanco;
+            cuentasalida.idmoneda = model.idmoneda;
+            cuentasalida.cuenta = model.cuenta;
+            cuentasalida.descripcion = model.descripcion;
 
             try
             {
