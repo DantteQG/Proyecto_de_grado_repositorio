@@ -27,6 +27,10 @@
                                 <v-layout wrap>
 
                                     <v-flex xs12 sm12 md50>
+                                        <v-select v-model="idempresa" 
+                                        :items="empresas" label="Empresa"></v-select>
+                                    </v-flex>
+                                    <v-flex xs12 sm12 md50>
                                         <v-select v-model="idbanco" 
                                         :items="bancos" label="Banco"></v-select>
                                     </v-flex>
@@ -113,12 +117,7 @@
 
                 <template slot="items" slot-scope="props">
                     <td>{{ props.item.cuenta }}</td>
-                    <td>{{ props.item.nombre }}</td>
-                    <td>{{ props.item.banco }}</td>
-                    <td>{{ props.item.moneda }}</td>
-                    <td>{{ props.item.correo }}</td>
-                    <td>{{ props.item.descripcion }}</td>
-                    <td>{{ props.item.usuario }}</td>                   
+                              
                 </template>
 
                 <template v-slot:[`item.esempleado`]="{ item }">
@@ -155,6 +154,7 @@
                 dialog: false,
                 headers: [
                     { text: 'Opciones', value: 'opciones'  } ,
+                    { text: 'Empresa', value: 'empresa', sortable: false},
                     { text: 'Cuenta', value: 'cuenta', sortable: false},
                     { text: 'Banco', value: 'banco', sortable: false },
                     { text: 'Moneda', value: 'moneda', sortable: false },
@@ -164,6 +164,8 @@
                 search: '',
                 editedIndex: -1,
                 id:'',
+                idempresa:'',
+                empresas:[],
                 idbanco:'',
                 bancos:[],
                 idmoneda:'',
@@ -210,6 +212,18 @@
 
             Select(){
                 let me=this;
+                var empresasArray=[];
+                axios.get('api/Empresas/select').then(function(response)
+                {
+                    //console.log(response);
+                    empresasArray=response.data;
+                    empresasArray.map(function(x){
+                        me.empresas.push({text: x.nombre,value:x.idempresa});
+                    });
+                }).catch(function(error){
+                    console.log(error);
+                });
+
                 var bancosArray=[];
                 axios.get('api/Bancos/select').then(function(response)
                 {
@@ -238,6 +252,7 @@
            
             editItem (item) {
                 this.id=item.idcuentasalida;
+                this.idempresa=item.idempresa;
                 this.idbanco=item.idbanco;
                 this.idmoneda=item.idmoneda;
                 this.cuenta=item.cuenta;
@@ -259,6 +274,7 @@
 
             limpiar(){
                 this.id="";
+                this.idempresa="";
                 this.idbanco="";
                 this.idmoneda="";
                 this.cuenta="";
@@ -276,6 +292,7 @@
                     let me=this;
                     axios.put('api/Cuentasalidas/Actualizar',{
                         'idcuentasalida':me.id,
+                        'idempresa':me.idempresa,
                         'idbanco':me.idbanco,
                         'idmoneda':me.idmoneda,
                         'cuenta':me.cuenta,
@@ -292,6 +309,7 @@
                     //codigo para guardar
                     let me=this;
                     axios.post('api/Cuentasalidas/Crear',{
+                        'idempresa':me.idempresa,
                         'idbanco':me.idbanco,
                         'idmoneda':me.idmoneda,
                         'cuenta':me.cuenta,
@@ -312,6 +330,9 @@
                 this.validaMensaje=[];
                 if(this.cuenta.length<3 || this.cuenta.length>50){
                     this.validaMensaje.push("La cuenta debe tener mas de 3 caracteres y menos de 50 caracteres.")
+                }
+                if(!this.idempresa){
+                    this.validaMensaje.push("Seleccione una empresa.")
                 }
                 if(!this.idbanco){
                     this.validaMensaje.push("Seleccione un banco.")
