@@ -3,8 +3,7 @@
     <v-navigation-drawer
       v-model="drawer"
       app
-      v-if="logueado"
-    >
+      v-if="logueado">
 
       <v-list dense>
         <template>
@@ -351,14 +350,19 @@
     <v-app-bar app>   
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
-        <span class="hidden-sm-and-down">Sistema</span>
+        <span class="hidden-sm-and-down">Sistema de solicitud de fondos y pagos</span>
       </v-toolbar-title>
-
-     
+      <v-spacer></v-spacer>
+      <b>{{ usu }}
+        <br>{{ rol }}</b>
+      <v-spacer></v-spacer>
       
-      <v-btn @click="salir" v-if="logueado"  icon>
-        <v-icon>logout</v-icon>Salir
-      </v-btn>
+      
+      <div >
+        <v-btn @click="salir" v-if="logueado"  icon>
+          <v-icon>logout</v-icon>Salir
+        </v-btn>
+      </div>
       <!-- <v-btn :to="{name: 'login'}" v-else>
         <v-icon>apps</v-icon>Login
       </v-btn> -->
@@ -395,12 +399,17 @@
 </template>
 
 <script>
+  import login from '@/components/Login.vue';
   export default {
     name: 'App',
+    components:{
+      login
+    },
     data (){
       return {
         drawer: true,
-        
+        usu : null,
+        rol:null
       }
     },
     computed:{
@@ -419,16 +428,24 @@
         return this.$store.state.usuario && this.$store.state.usuario.rol == "Contador";},
       esTesoreria(){
         return this.$store.state.usuario && this.$store.state.usuario.rol == "Tesoreria";},
-     
+      
+
     },
+    //mounted(){
+      //this.mostrarUsu();
+    //},
+
     created(){
       this.$store.dispatch("autoLogin");
+      this.mostrarUsu();
     },
     methods:{
       salir(){
         this.$store.dispatch("salir")
       },
-      
+      mostrarUsu(){
+        this.usu=this.$store.state.usuario.nombre;
+        this.rol=this.$store.state.usuario.rol;}
 
     }
   }

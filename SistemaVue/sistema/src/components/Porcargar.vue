@@ -196,8 +196,9 @@
                         </v-flex>
                         <v-row>
                             <v-spacer></v-spacer>
-                            <v-btn class="mt-2 mr-10" color="blue darken-1" @click="MostrarCargabanco" >Cargar banco</v-btn>
-                            <v-btn class="mt-2 mr-10" color="red darken-1" @click="cargaBanco(0)" >Rechazar</v-btn>
+                            <v-btn class="mt-2 mr-10" color="blue darken-1" @click="MostrarCargabanco" >Cargar banco Manual</v-btn>
+                            <v-btn class="mt-2 mr-10" color="red darken-1" @click="cargaBanco(0,0)" >Rechazar</v-btn>
+                            <v-btn color="blue darken-1"  @click.native="cargaBanco(1,0)">Cargar banco Api</v-btn>
                             <v-btn class="mt-2" color="primary" @click="volver">Volver</v-btn>
                             <v-spacer></v-spacer>
                         </v-row >
@@ -259,7 +260,7 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn color="blue darken-1"  @click.native="cerrardialoglote">Cancelar</v-btn>
-                        <v-btn color="blue darken-1"  @click.native="cargaBanco(1)">Guardar</v-btn>
+                        <v-btn color="blue darken-1"  @click.native="cargaBanco(1,1)">Guardar</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -632,6 +633,8 @@
                 this.idaprobador=item.idaprobador;
                 this.idcontador=item.idcontador;
 
+                this.moneda=item.moneda
+
                 let me=this;
                 this.Selectdinamic(me.idtipogasto);
                 this.idespecifgasto=item.idespecifgasto;
@@ -655,7 +658,7 @@
                 this.idcuentasalida='';
             },
 
-            cargaBanco(estado){
+            cargaBanco(estado,manual){
                 this.convertirnumero();
                 
                 let me=this;
@@ -687,18 +690,46 @@
                         'total':me.total,
                         'detalleorden':me.detalles
                     })
-                    axios.post('api/Op_cargados/Crear',{
-                        'idordendepago':me.id,
-                        'idcuentasalida':me.idcuentasalida,
-                        'lote':me.lote
-                    }).then(function(response){            
-                        me.dialog=true;
-                        me.editedIndex=-1;
-                        me.cerrardialoglote();
-                        me.validaMensaje=[];       
-                    }).catch(function(error){
+                    if(manual==0){
+                        axios.post('api/Op_cargados/Cargarapi',{
+                            'companyId':'001',
+                            'password':'pato123',
+                            'documentNumber':'7777777',
+                            'documentType':'Q',
+                            'documentExtension':'LP',
+                            'documentComplement':'',
+                            'amount':200.00,
+                            'currency':me.moneda,
+                            'fundSource': 'Giro comercial por distribucion de producto masivos',
+                            'fundDestination':me.concepto,
+                            'sourceAccount': '20100000000000',
+                            'sourceCurrency': me.moneda,
+                            'description': me.concepto,
+                            "sendVouchers": 'mquispeh@bancred.com.bo'
+                        }).then(function(response){            
+                            me.dialog=true;
+                            me.editedIndex=-1;
+                            me.cerrardialoglote();
+                            me.validaMensaje=[];       
+                        }).catch(function(error){
                         console.log(error);
-                    })
+                        })   
+                    }
+                    else{
+                        axios.post('api/Op_cargados/Crear',{
+                            'idordendepago':me.id,
+                            'idcuentasalida':me.idcuentasalida,
+                            'lote':me.lote
+                        }).then(function(response){            
+                            me.dialog=true;
+                            me.editedIndex=-1;
+                            me.cerrardialoglote();
+                            me.validaMensaje=[];       
+                        }).catch(function(error){
+                        console.log(error);
+                        })
+                    }
+                    
                 }
                 if(estado==0)
                 {

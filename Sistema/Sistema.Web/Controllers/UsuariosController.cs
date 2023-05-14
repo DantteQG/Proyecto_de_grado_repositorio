@@ -288,7 +288,7 @@ namespace Sistema.Web.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> Login2(LoginViewModel model)
+        public async Task<IActionResult> LoginAD(LoginViewModel model)
         {
 
             var strUsuario = model.usuario.ToUpper().Trim();
@@ -297,26 +297,30 @@ namespace Sistema.Web.Controllers
             //CParametrosPwb.StrUsuarioLogin = strUsuario;
             var StrIpAd = "proesa"; ///revisar stripad
 
+            bool authenAD =true;
+
             var booAutenticacion = Authenticate(strUsuario, strClave, "proesa.loc", StrIpAd);
             //var booAutenticacion = Authenticate(strUsuario, strClave, CParametrosPwb.strDominioLdap, CParametrosPwb.strIpAd);
             if (!booAutenticacion)
             {
-                //usuario no existe en AC
-                return NotFound();
-                // MostrarMensajeError("* Usuario y/o contraseña incorrectos.", true);
-                //Authenticated = false;
+                //MostrarMensajeError("* Usuario y/o contraseña incorrectos.", true);
+                authenAD = false;
                 //CParametrosPwb.StrUsuarioLogin = "";
                 //return;
+
+                //usuario no existe en AC
+                return NotFound();
             }
 
+            
             var usuario = await _context.Usuarios.Where(u => u.condicion == true).Include(u => u.rol).FirstOrDefaultAsync(u => u.usuario == strUsuario);
 
             if (usuario == null)
             {
-                //usuario no existe en Db
+                //usuario no existe en Db se debe crear en db
                 return NotFound();
             }
-
+           
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, usuario.idusuario.ToString()),
@@ -326,10 +330,12 @@ namespace Sistema.Web.Controllers
                 new Claim("rol", usuario.rol.nombre ),
                 new Claim("nombre", usuario.nombre )
             };
-
             return Ok(
-                new { token = Generartoken(claims) }
-                );
+            new { token = Generartoken(claims) }
+            );
+           
+            
+            
 
         }
 
@@ -385,8 +391,11 @@ namespace Sistema.Web.Controllers
             {
                 try
                 {
-                    var entry = new DirectoryEntry(strServidor, strUsuario, strClave);
-                    var nativeObject = entry.NativeObject;
+
+                    DirectoryEntry de = new DirectoryEntry(strServidor, strUsuario, strClave);
+                    DirectorySearcher dsearch = new DirectorySearcher(de);
+                    //var entry = new DirectoryEntry(strServidor, strUsuario, strClave);
+                    //var nativeObject = entry.NativeObject;
                     authenticated = true;
                 }
                 catch (DirectoryServicesCOMException cex)

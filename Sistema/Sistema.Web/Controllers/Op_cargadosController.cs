@@ -7,7 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sistema.Datos;
 using Sistema.Entidades.Tesoreria;
+using Sistema.Web.Models.Credinet.Cargabanco;
 using Sistema.Web.Models.Tesoreria.Op_cargado;
+
+using System.Text.Json;
+using Sistema.Web.Models.Credinet.Aprobador;
+using Sistema.Web.Models.Credinet.TipoOperacion;
 
 namespace Sistema.Web.Controllers
 {
@@ -22,7 +27,7 @@ namespace Sistema.Web.Controllers
             _context = context;
         }
 
-        // POST: api/Cuentasalidas/Crear
+        // POST: api/Op_cargados/Crear
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("[action]")]
         public async Task<ActionResult> Crear([FromBody] CrearViewModel model)
@@ -56,6 +61,85 @@ namespace Sistema.Web.Controllers
             return Ok();
 
         }
+
+
+        // POST: api/Op_cargados/CargaApi
+        [HttpPost("[action]")]
+        //public async Task<ActionResult> Cargarapi([FromBody]Cargabanco model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    //model.aprobador ={ aprobador}
+
+        //    AprobadorVM aprobador = new AprobadorVM()
+        //    {
+        //        idc = "cmonje",
+        //        type = 1
+                
+        //    };
+
+        //    //if PROV O ACH
+        //    TipoOperacionVM tipooperacion2 = new TipoOperacionVM
+        //    {
+        //        paymentType = "fasdfasdf",
+        //        line = 1,
+        //    };
+
+        //    //Cargabanco cargabanco = new Cargabanco
+        //    //{
+
+        //    //    companyId = 002,
+        //    //    password = "pato123",
+        //    //    documentNumber = "7042665",
+        //    //    documentType = "Q",
+        //    //    documentExtension = "LP",
+        //    //    documentComplement = "",
+        //    //    amount = model.amount,
+        //    //    currency = model.currency,
+        //    //    fundSource = "Giro comercial por distribucion de productos masivos",
+        //    //    fundDestination = model.fundDestination,//destino de fondos
+        //    //    sourceAccount = model.sourceAccount,//cuenta destino
+        //    //    sourceCurrency = model.sourceCurrency,
+        //    //    description = model.description,
+        //    //    sendVouchers = model.sendVouchers,
+        //    //    aprobador = new List<AprobadorVM>(),
+        //    //    aprobador = new AprobadorVM()
+        //    //    { idc =["cmonje", "dqg"], 
+        //    //          type = [1,2]
+        //    //        },
+        //    //    tipooperacion = tipooperacion2[],
+
+
+
+
+
+        //    //};
+
+            
+        //    cargabanco.tipooperacion = list<tipooperacion2>;
+
+        //    string jsonstring = JsonSerializer.Serialize(cargabanco);
+
+
+            
+        //    string jsonencriptado = Encrip.Encrypt(jsonstring);
+
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    return Ok();
+
+        //}
+
 
         private bool Op_cargadoExists(int id)
         {

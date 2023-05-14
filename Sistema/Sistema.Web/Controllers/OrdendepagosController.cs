@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sistema.Datos;
 using Sistema.Entidades.Solicitud;
+using Sistema.Web.Models.Credinet.Cargabanco;
 using Sistema.Web.Models.Solicitud.Ordendepago;
 
 namespace Sistema.Web.Controllers
@@ -414,8 +415,6 @@ namespace Sistema.Web.Controllers
                 total = model.total
             };
 
-
-
             try
             {
                 _context.Ordendepagos.Add(ordendepago);
@@ -591,6 +590,9 @@ namespace Sistema.Web.Controllers
 
             return Ok();
         }
+
+
+        
 
 
         private bool OrdendepagoExists(int id)
