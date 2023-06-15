@@ -22,3 +22,15 @@ C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Entidades\bin\Debug\net5.0\Sistema
 C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Entidades\bin\Debug\net5.0\Sistema.Entidades.dll
 C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Entidades\bin\Debug\net5.0\ref\Sistema.Entidades.dll
 C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Entidades\bin\Debug\net5.0\Sistema.Entidades.pdb
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Entidades\bin\Debug\net5.0\Sistema.Entidades.deps.json
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Entidades\bin\Debug\net5.0\Sistema.Entidades.dll
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Entidades\bin\Debug\net5.0\Sistema.Entidades.pdb
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidades.csproj.AssemblyReference.cache
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidades.GeneratedMSBuildEditorConfig.editorconfig
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidades.AssemblyInfoInputs.cache
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidades.AssemblyInfo.cs
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidades.csproj.CoreCompileInputs.cache
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidades.dll
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Entidades\obj\Debug\net5.0\refint\Sistema.Entidades.dll
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Entidades\obj\Debug\net5.0\Sistema.Entidades.pdb
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Entidades\obj\Debug\net5.0\ref\Sistema.Entidades.dll

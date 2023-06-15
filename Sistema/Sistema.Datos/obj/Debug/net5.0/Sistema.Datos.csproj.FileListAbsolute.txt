@@ -34,3 +34,21 @@ C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Dat
 C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\ref\Sistema.Datos.dll
 C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.pdb
 C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.genruntimeconfig.cache
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\bin\Debug\net5.0\Sistema.Datos.deps.json
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\bin\Debug\net5.0\Sistema.Datos.runtimeconfig.json
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\bin\Debug\net5.0\Sistema.Datos.runtimeconfig.dev.json
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\bin\Debug\net5.0\Sistema.Datos.dll
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\bin\Debug\net5.0\Sistema.Datos.pdb
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\bin\Debug\net5.0\Sistema.Entidades.dll
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\bin\Debug\net5.0\Sistema.Entidades.pdb
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.csproj.AssemblyReference.cache
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.GeneratedMSBuildEditorConfig.editorconfig
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.AssemblyInfoInputs.cache
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.AssemblyInfo.cs
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.csproj.CoreCompileInputs.cache
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.csproj.CopyComplete
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.dll
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\obj\Debug\net5.0\refint\Sistema.Datos.dll
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.pdb
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\obj\Debug\net5.0\Sistema.Datos.genruntimeconfig.cache
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Datos\obj\Debug\net5.0\ref\Sistema.Datos.dll
