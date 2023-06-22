@@ -162,7 +162,7 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn  :to="{ name: 'ordendepagos'}" rounded block elevation="10" color="blue" dark class="mb-3">Cerrar</v-btn>
+                            <v-btn  :to="{ name: 'missolicitudes'}" rounded block elevation="10" color="blue" dark class="mb-3">Cerrar</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>      

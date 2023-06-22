@@ -392,7 +392,7 @@ namespace Sistema.Web.Controllers
             int max = _context.Ordendepagos.DefaultIfEmpty().Max(op => op.idaprobador);
             Ordendepago ordendepago = new Ordendepago
             {
-                idordendepago = max + 1;
+                idordendepago = max + 1,
                 idestado = 1,
                 idusuario = model.idusuario,
                 idregional = model.idregional,

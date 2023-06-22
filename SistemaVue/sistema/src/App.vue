@@ -29,63 +29,23 @@
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'proyectos'}">
-              <v-list-item-action>
-                <v-icon>linear_scale</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>
-                  Proyectos
-                </v-list-item-title>  
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item :to="{ name: 'regionales'}">
-              <v-list-item-action>
-                <v-icon>linear_scale</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>
-                  Regionales
-                </v-list-item-title>  
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item :to="{ name: 'tipogastos'}">
+            <v-list-item :to="{ name: 'areas'}">
               <v-list-item-action>
                 <v-icon>table_chart</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>
-                  Tipos de gastos
+                  Areas
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'bancos'}">
+            <v-list-item :to="{ name: 'empresas'}">
               <v-list-item-action>
                 <v-icon>table_chart</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>
-                  Bancos
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item :to="{ name: 'cuentas'}">
-              <v-list-item-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>
-                  Cuentas
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item :to="{ name: 'cuentasalidas'}">
-              <v-list-item-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>
-                  Cuentas salidas
+                  Empresas
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -119,36 +79,6 @@
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'tiposolicitudes'}">
-              <v-list-item-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>
-                  Tipo de solicitud
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item :to="{ name: 'areas'}">
-              <v-list-item-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>
-                  Areas
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item :to="{ name: 'empresas'}">
-              <v-list-item-action>
-                <v-icon>table_chart</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>
-                  Empresas
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
             <v-list-item :to="{ name: 'monedas'}">
               <v-list-item-action>
                 <v-icon>table_chart</v-icon>
@@ -156,6 +86,46 @@
               <v-list-item-content>
                 <v-list-item-title>
                   Monedas
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item :to="{ name: 'proyectos'}">
+              <v-list-item-action>
+                <v-icon>linear_scale</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>
+                  Proyectos
+                </v-list-item-title>  
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item :to="{ name: 'regionales'}">
+              <v-list-item-action>
+                <v-icon>linear_scale</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>
+                  Regionales
+                </v-list-item-title>  
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item :to="{ name: 'tipogastos'}">
+              <v-list-item-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>
+                  Tipos de gastos
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item :to="{ name: 'tiposolicitudes'}">
+              <v-list-item-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>
+                  Tipo de solicitud
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -192,7 +162,6 @@
             </v-list-item>
           </v-list-group>
         </template>
-
         <template v-if="esAdministrador || esCreadorcuenta || esTesoreria">
             <v-list-group>
             <v-list-item slot="activator">
@@ -222,11 +191,18 @@
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
+            <v-list-item :to="{ name: 'cuentasalidas'}" v-if="esAdministrador || esTesoreria">
+              <v-list-item-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>
+                  Cuentas salida
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
           </v-list-group>
         </template>
-
-
-
         <template v-if="esAdministrador || esIniciador || esAprobador || esContador || esCreadorcuenta || esTesoreria">
             <v-list-group>
             <v-list-item slot="activator">
