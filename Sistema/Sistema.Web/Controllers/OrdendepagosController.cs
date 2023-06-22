@@ -389,7 +389,7 @@ namespace Sistema.Web.Controllers
 
             fechaprog = fechaprog.AddDays(dias * 1);
 
-            int max = _context.Ordendepagos.DefaultIfEmpty().Max(op => op.idaprobador);
+            int max = _context.Ordendepagos.DefaultIfEmpty().Max(op => op.idordendepago);
             Ordendepago ordendepago = new Ordendepago
             {
                 idordendepago = max + 1,
