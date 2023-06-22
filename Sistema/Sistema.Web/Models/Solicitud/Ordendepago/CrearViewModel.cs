@@ -10,6 +10,7 @@ namespace Sistema.Web.Models.Solicitud.Ordendepago
     public class CrearViewModel
     {   
         //PROPIEDADES MAESTRO
+        public int idordendepago { get; set; }
         public int idestado { get; set; }
         [Required]
         public int idusuario { get; set; }
