@@ -29,7 +29,7 @@ export default new Vuex.Store({
       if(token){
         commit("setToken",token)
         commit("setUsuario",decode(token))
-        router.push({name: 'home'})
+        router.push({name: 'poraprobar'})
       } 
     },
     salir({commit}){
@@ -37,6 +37,7 @@ export default new Vuex.Store({
       commit("setUsuario",null)
       sessionStorage.removeItem("token")
       router.push({name: 'login'})
+      location. reload()
     }
 
   }

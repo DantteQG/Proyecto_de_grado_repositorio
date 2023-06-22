@@ -50,6 +50,7 @@ export default {
             .then(data => {
                 this.$store.dispatch("guardarToken",data.token)
                 this.$router.push({name: 'poraprobar'})
+                location. reload()
             })
             .catch(err => {
                 //console.log(err.response)
