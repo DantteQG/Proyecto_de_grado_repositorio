@@ -41,7 +41,7 @@ namespace Sistema.Web.Controllers
                 .Include(op => op.moneda)
                 .Include(op => op.tiposolicitud)
                 .Include(op => op.modopago)
-                .Include(op =>op.proyecto)
+                .Include(op => op.proyecto)
                 .Include(op => op.cuenta)
                 .ThenInclude(c => c.banco)
                 .ToListAsync();
@@ -85,7 +85,7 @@ namespace Sistema.Web.Controllers
                 fechaprogramada = op.fechaprogramada.ToString("yyyy-MM-dd"),
                 factura = op.factura,
                 recibo = op.recibo,
-                rendido=op.rendido,
+                rendido = op.rendido,
                 concepto = op.concepto,
                 conceptobanco = op.conceptobanco,
                 total = op.total
@@ -97,7 +97,7 @@ namespace Sistema.Web.Controllers
         [HttpGet("[action]/{id}")]
         public async Task<IEnumerable<OrdendepagoViewModel>> Missolicitudes([FromRoute] int id)
         {
-            var ordendepago = await _context.Ordendepagos.Where(op =>op.idusuario == id)
+            var ordendepago = await _context.Ordendepagos.Where(op => op.idusuario == id)
                 .Include(op => op.estado)
                 .Include(op => op.usuario)
                 .Include(op => op.regional)
@@ -168,7 +168,7 @@ namespace Sistema.Web.Controllers
         {
             var ordendepago = await _context.Ordendepagos
                 .Where(op => op.idaprobador == id)
-                .Where(op =>op.idestado == 1)
+                .Where(op => op.idestado == 1)
                 .Include(op => op.estado)
                 .Include(op => op.usuario)
                 .Include(op => op.regional)
@@ -440,9 +440,9 @@ namespace Sistema.Web.Controllers
                 return BadRequest();
             }
 
-            
+
             //return Ok();
-            return Ok(new { id = ordendepago.idordendepago});
+            return Ok(new { id = ordendepago.idordendepago });
 
         }
 
@@ -577,11 +577,11 @@ namespace Sistema.Web.Controllers
             }
 
             ordendepago.idaprobador = model.idaprobador;
- 
+
             try
             {
                 await _context.SaveChangesAsync();
-                
+
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -593,7 +593,22 @@ namespace Sistema.Web.Controllers
         }
 
 
-        
+        // GET: api/Ordendepagos/pivot
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<PivotViewModel>> Pivot()
+        {
+            var pivot = await _context.Ordendepagos.Where(a => a.idestado == 3 ).ToListAsync();
+
+            return pivot.Select(a => new PivotViewModel
+            {
+                fechapromada = a.fechaprogramada.ToString("yyyy-MM-dd"),
+                idespecifgasto = a.idespecifgasto,
+                total = a.total
+
+            });
+        }
+
+
 
 
         private bool OrdendepagoExists(int id)

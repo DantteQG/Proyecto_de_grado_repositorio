@@ -201,7 +201,7 @@
                 let me=this;
                 axios.get('api/Bancos/Listar').then(function(response)
                 {
-                    //console.log(response);
+                    console.log(response);
                     me.bancos=response.data;
 
                 }).catch(function(error){

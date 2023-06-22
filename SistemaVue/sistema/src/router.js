@@ -26,6 +26,7 @@ import Concluidas from './components/Concluidas.vue'
 import Porcargar from './components/Porcargar.vue'
 import Porconfirmar from './components/Porconfirmar.vue'
 import Cuentasalida from './components/Cuentasalida.vue'
+import Pivot from './components/pitot.vue'
 
 
 Vue.use(Router)
@@ -51,6 +52,14 @@ var router = new Router({
       path: '/login',
       name: 'login',
       component: Login,
+      meta: {
+        libre: true
+      }
+    },
+    {
+      path: '/pivot',
+      name: 'pivot',
+      component: Pivot,
       meta: {
         libre: true
       }
