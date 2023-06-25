@@ -193,7 +193,7 @@
 
                         <v-row aling="center" cols="6" sm="2">
                             <v-spacer></v-spacer>
-                            <v-subheader>Cuenta:</v-subheader>
+                            <v-subheader>Cuenta salida:</v-subheader>
                             <v-select class="mr-10" v-model="idcuentasalida" 
                                         :items="cuentasalidas" label="Cuenta salida" outlined></v-select>
                         </v-row>
@@ -326,7 +326,8 @@
                     { text: 'Detalle', value: 'detalle' },
                     { text: 'Nro Documento', value: 'nrodocumento' },
                     { text: 'Monto', value: 'monto' },
-                ],    
+                ],
+   
                 search: '',
                 editedIndex: -1,
                 id:'',
@@ -375,6 +376,8 @@
                 idaddespgasto:'',
                 diaGastos:[],
                 adiddetalles:'',
+                adopcargada:'',
+                
                 verOrdenpago:0,
                 menu: false,
                 modal: false,
@@ -385,13 +388,15 @@
                 cuentasalidas:[],
                 idcuentasalida:'',
                 lote:'',
+                lotess:'',
+
 
                 fechadepago:new Date().toISOString().split('T')[0],
             }
         },
         computed: {
              formTitle () {
-            return this.editedIndex === -1 ? 'La solicitud ha sido Cargada ' : 'La solicitud ha sido rechazada'
+            return this.editedIndex === -1 ? 'La solicitud ha sido confirmada ' : 'La solicitud ha sido rechazada'
             },
             calcularTotal:function(){
                 var resultado=0.0;
@@ -438,8 +443,25 @@
                     me.detalles=response.data;
                 }).catch(function(error){
                     console.log(error);
-                });
+                });      
             },
+            listaropcargada(iddetalles){
+                let me=this;
+                me.idcuentasalida='';
+                this.adiddetalles=iddetalles;
+                var cuentaSalidaArray=[];
+                
+                axios.get('api/Op_cargados/Listar/'+this.adiddetalles,{}).then(function(response)
+                {
+                    //console.log(response);
+                    cuentaSalidaArray=response.data;
+                    me.idcuentasalida=cuentaSalidaArray[0].idcuentasalida;
+                    me.lote=cuentaSalidaArray[0].lote;
+                }).catch(function(error){
+                    console.log(error);
+                });      
+            },
+
 
            Select(){
                 let me=this;
@@ -577,7 +599,7 @@
                 });
 
                 var CuentasalidasArray=[];
-         
+                
                 axios.get('api/Cuentasalidas/Select').then(function(response)
                 {
                     //console.log(response);
@@ -665,6 +687,7 @@
                 this.Selectdinamic(me.idtipogasto);
                 this.idespecifgasto=item.idespecifgasto;
                 this.listardetalle(me.id);
+                this.listaropcargada(me.id);
             },
 
             close () {

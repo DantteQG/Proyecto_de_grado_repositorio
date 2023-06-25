@@ -14,6 +14,7 @@ using System.Text.Json;
 using Sistema.Web.Models.Credinet.Aprobador;
 using Sistema.Web.Models.Credinet.TipoOperacion;
 
+
 namespace Sistema.Web.Controllers
 {
     [Route("api/[controller]")]
@@ -62,7 +63,21 @@ namespace Sistema.Web.Controllers
 
         }
 
+        // GET: api/Op_cargados/Listar/1
+        [HttpGet("[action]/{id}")]
+        public async Task<IEnumerable<Op_cargadoViewModel>> Listar([FromRoute] int id)
+        {
+            var opcargadp = await _context.Op_cargados
+                .Where(opcarg => opcarg.idordendepago == id).ToListAsync();
 
+
+            return opcargadp.Select(opcarg => new Op_cargadoViewModel
+            {
+                idcuentasalida = opcarg.idcuentasalida,
+                lote = opcarg.lote
+
+            });
+        }
         // POST: api/Op_cargados/CargaApi
         [HttpPost("[action]")]
         //public async Task<ActionResult> Cargarapi([FromBody]Cargabanco model)
