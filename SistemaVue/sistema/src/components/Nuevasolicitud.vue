@@ -158,7 +158,7 @@
                         </v-card-title>
         
                         <v-card-text>
-                        Contacte con su aprobador
+                        Contacte con su aprobador 
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>

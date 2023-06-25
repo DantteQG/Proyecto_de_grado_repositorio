@@ -198,8 +198,8 @@
                             <v-spacer></v-spacer>
                             <v-btn class="mt-2 mr-10" color="blue darken-1" @click="MostrarCargabanco" >Cargar banco Manual</v-btn>
                             <v-btn class="mt-2 mr-10" color="red darken-1" @click="cargaBanco(0,0)" >Rechazar</v-btn>
-                            <v-btn color="blue darken-1"  @click.native="cargaBanco(1,0)">Cargar banco Api</v-btn>
-                            <v-btn class="mt-2" color="primary" @click="volver">Volver</v-btn>
+                            <!-- <v-btn color="blue darken-1"  @click.native="cargaBanco(1,0)">Cargar banco Api</v-btn> -->
+                            <v-btn class="mt-2" color="primary" @click="volver">Volver</v-btn> 
                             <v-spacer></v-spacer>
                         </v-row >
                         <v-dialog v-model="dialog" max-width="500px">
@@ -207,7 +207,7 @@
                                 <v-card-title>
                                 <span class="headline">{{ formTitle}}</span>
                                 </v-card-title>
-                                <v-card-text>hola</v-card-text>
+                                <v-card-text></v-card-text>
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
                                     <v-btn @click.native="close" rounded block elevation="10" color="blue" dark class="mb-3">Cerrar</v-btn>
@@ -248,10 +248,10 @@
                             <v-layout wrap>
                                 <v-flex xs12 sm12 md50>
                                         <v-select v-model="idcuentasalida" 
-                                        :items="cuentasalidas" label="Banco"></v-select>
+                                        :items="cuentasalidas" label="Banco salida"></v-select>
                                     </v-flex>
                                     <v-flex xs12 sm12 md12>
-                                        <v-text-field v-model="lote" label="lote"></v-text-field>
+                                        <v-text-field v-model="lote" label="Lote"></v-text-field>
                                     </v-flex>
                             </v-layout>
                         </v-container>
@@ -363,7 +363,7 @@
         },
         computed: {
              formTitle () {
-            return this.editedIndex === -1 ? 'La solicitud ha sido Cargada ' : 'La solicitud ha sido rechazada'
+            return this.editedIndex === -1 ? 'La solicitud ha sido cargada ' : 'La solicitud ha sido rechazada'
             },
             calcularTotal:function(){
                 var resultado=0.0;
@@ -555,7 +555,7 @@
                     //console.log(response);
                     CuentasalidasArray=response.data;
                     CuentasalidasArray.map(function(x){
-                        me.cuentasalidas.push({text: x.moneda+' - '+x.cuenta+' - '+x.banco,value:x.idcuentasalida});
+                        me.cuentasalidas.push({text: x.banco+ ' - '+x.empresa+' - '+ x.moneda+' - '+x.cuenta,value:x.idcuentasalida});
                     });
                     //me.codigobanco=Cuentas.text2;
                 }).catch(function(error){

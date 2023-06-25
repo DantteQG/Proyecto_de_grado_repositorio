@@ -190,6 +190,18 @@
                             <v-subheader>Aprobador:</v-subheader>
                             <v-select class="mr-10" v-model="idaprobador" :items="Aprobadores" label="Selecione un aprobador" outlined></v-select>
                         </v-row>
+
+                        <v-row aling="center" cols="6" sm="2">
+                            <v-spacer></v-spacer>
+                            <v-subheader>Cuenta:</v-subheader>
+                            <v-select class="mr-10" v-model="idcuentasalida" 
+                                        :items="cuentasalidas" label="Cuenta salida" outlined></v-select>
+                        </v-row>
+                        <v-row aling="center" cols="6" sm="2">
+                            <v-spacer></v-spacer>
+                            <v-subheader>Lote:</v-subheader>
+                            <v-text-field class="mr-10" v-model="lote"></v-text-field>
+                        </v-row>
                         <v-flex xs12 sm12 md12 v-show="valida">
                             <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v">
                              </div>
@@ -220,7 +232,7 @@
                                 <v-card-title>
                                 <span class="headline">{{ formTitle}}</span>
                                 </v-card-title>
-                                <v-card-text>hola</v-card-text>
+                                <v-card-text></v-card-text>
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
                                     <v-btn @click.native="close" rounded block elevation="10" color="blue" dark class="mb-3">Cerrar</v-btn>

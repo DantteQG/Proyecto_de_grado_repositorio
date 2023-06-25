@@ -27,7 +27,17 @@
                   Pivot
                 </v-list-item-title>
               </v-list-item-content>
-            </v-list-item>        
+            </v-list-item>
+            <v-list-item :to="{ name: 'pivot2'}">
+              <v-list-item-action>
+                <v-icon>home</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>
+                  Pivot2
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>      
         </template>
         
         <template v-if="esAdministrador">

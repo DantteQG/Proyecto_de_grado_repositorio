@@ -27,6 +27,8 @@ import Porcargar from './components/Porcargar.vue'
 import Porconfirmar from './components/Porconfirmar.vue'
 import Cuentasalida from './components/Cuentasalida.vue'
 import Pivot from './components/pitot.vue'
+import Pivot2 from './components/pivot2.vue'
+
 
 
 Vue.use(Router)
@@ -60,6 +62,14 @@ var router = new Router({
       path: '/pivot',
       name: 'pivot',
       component: Pivot,
+      meta: {
+        libre: true
+      }
+    },
+    {
+      path: '/pivot2',
+      name: 'pivot2',
+      component: Pivot2,
       meta: {
         libre: true
       }

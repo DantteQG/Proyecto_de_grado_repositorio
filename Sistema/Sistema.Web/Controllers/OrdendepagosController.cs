@@ -597,12 +597,18 @@ namespace Sistema.Web.Controllers
         [HttpGet("[action]")]
         public async Task<IEnumerable<PivotViewModel>> Pivot()
         {
-            var pivot = await _context.Ordendepagos.Where(a => a.idestado == 3 ).ToListAsync();
+           
+
+            var pivot = await _context.Ordendepagos.
+                Where(a => a.idestado == 3 )
+                .Include(a => a.especifgasto)
+                .ThenInclude(ep => ep.tipogasto)
+                .ToListAsync();
 
             return pivot.Select(a => new PivotViewModel
             {
-                fechapromada = a.fechaprogramada.ToString("yyyy-MM-dd"),
-                idespecifgasto = a.idespecifgasto,
+                fechapromada = a.fechaprogramada.ToString("MM-dd"),
+                especifgasto = a.especifgasto.nombre,
                 total = a.total
 
             });

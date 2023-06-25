@@ -56,8 +56,8 @@ namespace Sistema.Web.Controllers
         public async Task<IEnumerable<SelectViewModel>> Selectaprobador()
         {
             var usuario = await _context.Usuarios.Where(u => u.condicion == true)
-                .Where(u => u.idrol == 2 || u.idrol == 5)
-                
+                .Where(u => u.idrol == 2 || u.idrol == 4 || u.idrol == 5 || u.idrol == 6)
+                .OrderBy(u=> u.nombre)
                 .ToListAsync();
 
             return usuario.Select(u => new SelectViewModel
@@ -74,6 +74,7 @@ namespace Sistema.Web.Controllers
         {
             var usuario = await _context.Usuarios.Where(u => u.condicion == true)
                 .Where(u => u.idrol == 4)
+                .OrderBy(u => u.nombre)
                 .ToListAsync();
 
             return usuario.Select(u => new SelectViewModel

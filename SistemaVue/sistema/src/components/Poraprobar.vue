@@ -207,7 +207,7 @@
                                 <v-card-title>
                                 <span class="headline">{{ formTitle}}</span>
                                 </v-card-title>
-                                <v-card-text>hola</v-card-text>
+                                <v-card-text></v-card-text>
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
                                     <v-btn @click.native="close" rounded block elevation="10" color="blue" dark class="mb-3">Cerrar</v-btn>
@@ -331,7 +331,7 @@
         },
         computed: {
              formTitle () {
-            return this.editedIndex === -1 ? 'La solicitud ha sido Aprobada' : 'La solicitud ha sido rechazada'
+            return this.editedIndex === -1 ? 'La solicitud ha sido aprobada' : 'La solicitud ha sido rechazada'
             },
             calcularTotal:function(){
                 var resultado=0.0;

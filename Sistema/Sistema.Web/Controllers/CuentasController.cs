@@ -61,7 +61,7 @@ namespace Sistema.Web.Controllers
             {
                 idcuenta = c.idcuenta,
                 codigobanco = c.banco.codigobanco,
-                banco = c.banco.nombre,
+                banco = c.banco.alias,
                 cuenta = c.cuenta,
                 nombre = c.nombre,
             });
