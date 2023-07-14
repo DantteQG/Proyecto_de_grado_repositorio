@@ -316,14 +316,32 @@ namespace Sistema.Web.Controllers
 
             if (usuario == null)
             {
+                string correo = model.usuario.ToLower() + "@proesabol.com";
+                CrearPasswordHash(model.password, out byte[] passwordHash, out byte[] passwordSalt);
+
                 Usuario usuarionuevo = new Usuario
                 {
                     idrol = 1,
-                    nombre = model.usuario, 
+                    nombre = usu,
+                    email = correo,
+                    telefono = "7500000",
+                    usuario = usu,
+                    password_hash = passwordHash,
+                    password_salt = passwordSalt,
+                    descripcion = "",
                     condicion = true
                 };
 
                 _context.Usuarios.Add(usuarionuevo);
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                usuario = await _context.Usuarios.Where(u => u.condicion == true).Include(u => u.rol).FirstOrDefaultAsync(u => u.usuario == usu);
             }
 
             

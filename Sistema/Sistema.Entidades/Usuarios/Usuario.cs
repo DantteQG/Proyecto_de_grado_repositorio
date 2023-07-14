@@ -21,9 +21,7 @@ namespace Sistema.Entidades.Usuarios
         public string telefono { get; set; }
         [Required]
         public string usuario { get; set; }
-        [Required]
         public byte[] password_hash{ get; set; }
-        [Required]
         public byte[] password_salt { get; set; }
 
         public string descripcion { get; set; }

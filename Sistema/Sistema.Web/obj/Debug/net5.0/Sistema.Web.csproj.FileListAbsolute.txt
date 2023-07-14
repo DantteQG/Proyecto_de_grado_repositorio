@@ -443,3 +443,4 @@ C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Web\obj\Debug\net5.0\S
 C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Web\obj\Debug\net5.0\Sistema.Web.genruntimeconfig.cache
 C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Web\obj\Debug\net5.0\ref\Sistema.Web.dll
 C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Web\bin\Debug\net5.0\Novell.Directory.Ldap.NETStandard.dll
+C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Web\bin\Debug\net5.0\Novell.Directory.Ldap.NETStandard.dll
