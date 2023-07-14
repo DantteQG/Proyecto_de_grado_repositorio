@@ -25,7 +25,7 @@ namespace Sistema.Web.Controllers
         }
 
         // GET: api/Areas/Listar
-        [Authorize(Roles = "Administrador")]
+        //[Authorize(Roles = "Administrador")]
         [HttpGet("[action]")]
         public async Task<IEnumerable<AreaViewModel>> Listar()
         {

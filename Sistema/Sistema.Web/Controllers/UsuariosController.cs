@@ -14,6 +14,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.DirectoryServices;
+using Novell.Directory.Ldap;
+using Microsoft.AspNetCore.Identity;
 
 namespace Sistema.Web.Controllers
 {
@@ -292,51 +294,52 @@ namespace Sistema.Web.Controllers
         public async Task<IActionResult> LoginAD(LoginViewModel model)
         {
 
-            var strUsuario = model.usuario.ToUpper().Trim();
-            var strUsuarioEntidad = strUsuario;
-            var strClave = model.password;//usuaqui
-            //CParametrosPwb.StrUsuarioLogin = strUsuario;
-            var StrIpAd = "proesa"; ///revisar stripad
+            var usu = model.usuario.ToLower();
+            var passw = model.password;
+            var dominioP = "Proesabol.Loc";
+            var dominioL = "Logmark";
+            var adIpadP = "192.168.2.22";
+            var adIpadL = "192.168.2.22";
 
-            bool authenAD =true;
+            bool UserExists_=false;
 
-            var booAutenticacion = Authenticate(strUsuario, strClave, "proesa.loc", StrIpAd);
-            //var booAutenticacion = Authenticate(strUsuario, strClave, CParametrosPwb.strDominioLdap, CParametrosPwb.strIpAd);
-            if (!booAutenticacion)
+            if(UserExists_ == UserExists(usu,passw,dominioP,adIpadP))
             {
-                //MostrarMensajeError("* Usuario y/o contraseña incorrectos.", true);
-                authenAD = false;
-                //CParametrosPwb.StrUsuarioLogin = "";
-                //return;
-
-                //usuario no existe en AC
-                return NotFound();
+                if(UserExists_ == UserExists(usu, passw, dominioL, adIpadL))
+                    {
+                    return NotFound();
+                }
             }
-
             
-            var usuario = await _context.Usuarios.Where(u => u.condicion == true).Include(u => u.rol).FirstOrDefaultAsync(u => u.usuario == strUsuario);
+
+            var usuario = await _context.Usuarios.Where(u => u.condicion == true).Include(u => u.rol).FirstOrDefaultAsync(u => u.usuario == usu);
 
             if (usuario == null)
             {
-                //usuario no existe en Db se debe crear en db
-                return NotFound();
+                Usuario usuarionuevo = new Usuario
+                {
+                    idrol = 1,
+                    nombre = model.usuario, 
+                    condicion = true
+                };
+
+                _context.Usuarios.Add(usuarionuevo);
             }
-           
+
+            
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, usuario.idusuario.ToString()),
-                new Claim(ClaimTypes.Email, strUsuario),
+                new Claim(ClaimTypes.Email, usu),
                 new Claim(ClaimTypes.Role, usuario.rol.nombre ),
                 new Claim("idusuario", usuario.idusuario.ToString() ),
                 new Claim("rol", usuario.rol.nombre ),
                 new Claim("nombre", usuario.nombre )
             };
+
             return Ok(
-            new { token = Generartoken(claims) }
-            );
-           
-            
-            
+                new { token = Generartoken(claims) }
+                );
 
         }
 
@@ -380,36 +383,43 @@ namespace Sistema.Web.Controllers
         }
 
 
-        public bool Authenticate(string strUsuario, string strClave, string domain, string strIpAd)
+        public bool UserExists(string username, string password, string domain, string ipAddress)
         {
-            bool authenticated;
-            var strServidor = "LDAP://" + strIpAd + "/DC=" + domain + ",DC=loc";
-            if (strUsuario == "ADMINISTRADOR.PROESA" && strClave == /*CParametrosPwb.strIdTemaGral*/ strIpAd)
-            {
-                authenticated = true;
-            }
-            else
-            {
-                try
-                {
+            bool userExists = false;
+            var server = ipAddress;
+            var ldapUser = $"{username}@{domain}";
 
-                    DirectoryEntry de = new DirectoryEntry(strServidor, strUsuario, strClave);
-                    DirectorySearcher dsearch = new DirectorySearcher(de);
-                    //var entry = new DirectoryEntry(strServidor, strUsuario, strClave);
-                    //var nativeObject = entry.NativeObject;
-                    authenticated = true;
-                }
-                catch (DirectoryServicesCOMException cex)
-                {
-                    authenticated = false;
-                }
-                catch (Exception ex)
-                {
-                    authenticated = false;
-                }
+            try
+            {
+                var ldapConnection = new LdapConnection { SecureSocketLayer = false };
+                ldapConnection.Connect(server, LdapConnection.DefaultPort);
+                ldapConnection.Bind(ldapUser, password);
+
+                var searchBase = $"DC=proesabol,DC=loc"; // Ajustar el valor de acuerdo a tu estructura de directorio
+                var filter = $"(&(objectClass=user)(sAMAccountName={username}))";
+
+                var searchResult = ldapConnection.Search(
+                    searchBase,
+                    LdapConnection.ScopeSub,
+                    filter,
+                    null,
+                    false
+                );
+
+                userExists = searchResult.HasMore();
+
+                ldapConnection.Disconnect();
+            }
+            catch (LdapException ldapEx)
+            {
+                // Manejar la excepción en caso de error en la autenticación o búsqueda
+            }
+            catch (Exception ex)
+            {
+                // Manejar otras excepciones
             }
 
-            return authenticated;
+            return userExists;
         }
 
     }

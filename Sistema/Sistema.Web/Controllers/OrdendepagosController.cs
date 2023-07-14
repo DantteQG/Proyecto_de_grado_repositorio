@@ -600,7 +600,7 @@ namespace Sistema.Web.Controllers
            
 
             var pivot = await _context.Ordendepagos.
-                Where(a => a.idestado == 3 )
+                Where(a => a.idestado == 3 || a.idestado == 2 )
                 .Include(a => a.especifgasto)
                 .ThenInclude(ep => ep.tipogasto)
                 .ToListAsync();

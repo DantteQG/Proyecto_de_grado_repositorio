@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JfOLp4N1xjazJB2KbmxxxgTT/+AKGrGl0Bco58fdqt8dAkHmhrxdtE0A0hVQoZGHDdmNKcU9/9VMI1/M8QpItw==",
+  "dgSpecHash": "X4ja5mDzwx8k3Od3usIhtUBw2sLcef2iA4KNkRnXUIadp1z2TyokwYbPqxl4W5pZA3t3JvgDGDKIR5hQTIFuEA==",
   "success": true,
   "projectFilePath": "C:\\proyecto\\Proyecto_de_grado_repositorio\\Sistema\\Sistema.Web\\Sistema.Web.csproj",
   "expectedPackageFiles": [
@@ -57,6 +57,7 @@
     "C:\\Users\\dantt\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\dantt\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\dantt\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\dantt\\.nuget\\packages\\novell.directory.ldap.netstandard\\3.6.0\\novell.directory.ldap.netstandard.3.6.0.nupkg.sha512",
     "C:\\Users\\dantt\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\dantt\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
     "C:\\Users\\dantt\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
