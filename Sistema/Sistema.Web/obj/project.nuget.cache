@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5X9yqAP/GGzIjkyM7JsZ4/F7mNveSXHcetcXUc9bwRYA4JN0S79XuJ5meHArr28+m8l2VnB2ZTyPz8ZxsDJQpQ==",
+  "dgSpecHash": "ixoV8fdQ+eSZoGizeEECrC4WrNAbw7LxN04FZ0v2RwT3awGXK1q4+przJx3IprKfz5qHmw4ITZ5mhu4hLImVUg==",
   "success": true,
   "projectFilePath": "C:\\Sistema ASP Net Core Vuejs\\Sistema\\Sistema.Web\\Sistema.Web.csproj",
   "expectedPackageFiles": [
@@ -56,7 +56,7 @@
     "C:\\Users\\Dantte Quiroz\\.nuget\\packages\\microsoft.visualstudio.web.codegenerators.mvc\\5.0.2\\microsoft.visualstudio.web.codegenerators.mvc.5.0.2.nupkg.sha512",
     "C:\\Users\\Dantte Quiroz\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Dantte Quiroz\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
-    "C:\\Users\\Dantte Quiroz\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\Dantte Quiroz\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Dantte Quiroz\\.nuget\\packages\\novell.directory.ldap.netstandard\\3.6.0\\novell.directory.ldap.netstandard.3.6.0.nupkg.sha512",
     "C:\\Users\\Dantte Quiroz\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\Dantte Quiroz\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
