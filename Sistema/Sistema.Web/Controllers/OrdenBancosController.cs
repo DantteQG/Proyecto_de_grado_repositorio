@@ -14,6 +14,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json;
+using Sistema.Web.Models.Solicitud.OrdenBanco;
 
 namespace Sistema.Web.Controllers
 {
@@ -33,10 +34,14 @@ namespace Sistema.Web.Controllers
         // POST: api/OrdenBancos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Ordendepago>> PostOrdendepago(Ordendepago ordendepago)
+        public async Task<ActionResult> infoBanco([FromBody] OrdenBancoViewModel model)
         {
-            _context.Ordendepagos.Add(ordendepago);
-            await _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            
 
             var requestData = new RequestData
             {
@@ -53,13 +58,20 @@ namespace Sistema.Web.Controllers
                 sourceAccount = "20100000000000", //CUENTA SALIDA
                 sourceCurrency = "BOL", //MONEDA CUENTA
                 description = "desc", // DESCRIPCION
-                sendVouchers = "Dantte.quiroz@proesabol.com",
+                sendVouchers = "Dantte.quiroz@proesabol.com",//email
                 cismartApprovers = new List<CismartApprover>
                     {
-                        new CismartApprover 
-                        { 
-                            idc = "04011574-Q-PO", //aprobadores
+                        new CismartApprover
+                        {
+                            idc = "04011574-Q-PO",//aprobadore1
                             type = 1 //tipo J+G  tipo A+C
+
+                        },
+                        new CismartApprover
+                        {
+                            idc = "04011574-Q-PO",//aprobadore2
+                            type = 3 //tipo J+G  tipo A+C
+
                         }
                     },
                 spreadsheet = new Spreadsheet
@@ -147,7 +159,7 @@ namespace Sistema.Web.Controllers
 
 
 
-            return CreatedAtAction("GetOrdendepago", new { id = ordendepago.idordendepago }, ordendepago);
+            return Ok();
 
         }
 

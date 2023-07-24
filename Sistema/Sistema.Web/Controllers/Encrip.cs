@@ -13,7 +13,7 @@ namespace Sistema.Web.Controllers
     public class Encrip
     {
 
-        static readonly string password = "P455W0rd";
+        static readonly string password = "abc123";
         public static string Encrypt(string plainText)
         {
             if (plainText == null)
