@@ -55,7 +55,7 @@ namespace Sistema.Web.Controllers
                 usuario = op.usuario.nombre,
                 idregional = op.idregional,
                 regional = op.regional.nombre,
-                idarea = op.idregional,
+                idarea = op.idarea,
                 area = op.area.nombre,
                 idempresa = op.idempresa,
                 empresa = op.empresa.nombre,
@@ -124,7 +124,7 @@ namespace Sistema.Web.Controllers
                 usuario = op.usuario.nombre,
                 idregional = op.idregional,
                 regional = op.regional.nombre,
-                idarea = op.idregional,
+                idarea = op.idarea,
                 area = op.area.nombre,
                 idempresa = op.idempresa,
                 empresa = op.empresa.nombre,
@@ -195,7 +195,7 @@ namespace Sistema.Web.Controllers
                 usuario = op.usuario.nombre,
                 idregional = op.idregional,
                 regional = op.regional.nombre,
-                idarea = op.idregional,
+                idarea = op.idarea,
                 area = op.area.nombre,
                 idempresa = op.idempresa,
                 empresa = op.empresa.nombre,
@@ -265,7 +265,7 @@ namespace Sistema.Web.Controllers
                 usuario = op.usuario.nombre,
                 idregional = op.idregional,
                 regional = op.regional.nombre,
-                idarea = op.idregional,
+                idarea = op.idarea,
                 area = op.area.nombre,
                 idempresa = op.idempresa,
                 empresa = op.empresa.nombre,
@@ -335,7 +335,7 @@ namespace Sistema.Web.Controllers
                 usuario = op.usuario.nombre,
                 idregional = op.idregional,
                 regional = op.regional.nombre,
-                idarea = op.idregional,
+                idarea = op.idarea,
                 area = op.area.nombre,
                 idempresa = op.idempresa,
                 empresa = op.empresa.nombre,
@@ -474,7 +474,7 @@ namespace Sistema.Web.Controllers
                 return NotFound();
             }
 
-            ordendepago.idestado = model.idestado;
+            //ordendepago.idestado = model.idestado;
             ordendepago.idusuario = model.idusuario;
             ordendepago.idregional = model.idregional;
             ordendepago.idarea = model.idarea;

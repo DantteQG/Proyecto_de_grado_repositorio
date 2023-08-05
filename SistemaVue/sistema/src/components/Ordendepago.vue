@@ -28,7 +28,8 @@
                         <td>{{ props.item.idordendepago }}</td>
                         <td>{{ props.item.estado }}</td>
                         <td>{{ props.item.usuario }}</td>
-                        <td>{{ props.item.regional }}</td>  
+                        <td>{{ props.item.regional }}</td>
+                        <td>{{ props.item.area }}</td>    
                         <td>{{ props.item.cuenta}}</td>                 
                     </template>
                     <template v-slot:[`item.rendido`]="{ item }">
@@ -194,7 +195,13 @@
                             <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v">
                              </div>
                         </v-flex>
+
                         <v-row>
+                            <v-spacer></v-spacer>
+                            <v-btn class="mt-2" color="primary" @click="modificar">Modificar</v-btn>
+                            <v-spacer></v-spacer>
+                        
+                        
                             <v-spacer></v-spacer>
                             <v-btn class="mt-2" color="primary" @click="volver">Volver</v-btn>
                             <v-spacer></v-spacer>
@@ -253,7 +260,7 @@
                     { text: 'USUARIO', value: 'usuario'  },
                     { text: 'EMPRESA', value: 'empresa'  },
                     //{ text: 'REGIONAL', value: 'regional'  },
-                    //{ text: 'AREA', value: 'area'  },
+                    { text: 'AREA', value: 'idarea'  },
                     { text: 'ESPECIFICACION', value: 'especifgasto' },
                     { text: 'APROBADOR', value: 'aprobador' },
                     //{ text: 'TIPO DE PAGO', value: 'tiposolicitud' },
@@ -383,11 +390,13 @@
                 var AreasArray=[];
                 axios.get('api/Areas/Select').then(function(response)
                 {
-                    //console.log(response);
+                    console.log(response);
                     AreasArray=response.data;
                     AreasArray.map(function(x){
                         me.Areas.push({text: x.nombre,value:x.idarea});
+                        
                     });
+                    console.log(me.Areas);
                 }).catch(function(error){
                     console.log(error);
                 });
@@ -559,6 +568,8 @@
 
            
             editItem (item) {
+                console.log(this.Areas)
+                console.log(item.idarea)
                 this.verOrdenpago=1;
                 this.id=item.idordendepago;
                 this.idusuario=item.idusuario;
@@ -595,6 +606,106 @@
                 this.listar();
                 this.editedIndex=-1;
             },
+
+
+            modificar(){
+                this.convertirnumero();
+                
+                let me=this;
+                me.total=me.total*1
+                  
+                    if(this.validar()){
+                        return;
+                    }
+                    axios.put('api/Ordendepagos/Actualizar',{
+                        'idordendepago':me.id,
+                        'idusuario':me.idusuario,
+                        'idaprobador':me.idaprobador,
+                        'idcontador':me.idcontador,
+                        'idregional':me.idregional,
+                        'idarea':me.idarea,
+                        'idempresa':me.idempresa,
+                        'idespecifgasto':me.idespecifgasto,
+                        'idmoneda':me.idmoneda,
+                        'idtiposolicitud':me.idtiposolicitud,
+                        'idmodopago':me.idmodopago,
+                        'idproyecto':me.idproyecto,
+                        'idcuenta':me.idcuenta,
+                        'fechaprogramada':me.fechaprogramada,
+                        'factura':me.factura,
+                        'recibo':me.recibo,
+                        'concepto':me.concepto,
+                        'total':me.total,
+                        'detalleorden':me.detalles
+
+                    }).then(function(response){            
+                        me.dialog=true;
+                        me.editedIndex=-1; 
+                        me.validaMensaje=[];       
+                    }).catch(function(error){
+                        console.log(error);
+                    })
+                
+            },
+
+            validar(){
+                this.valida=0;
+                this.validaMensaje=[];
+                if(!this.idarea){
+                    this.validaMensaje.push("Seleccione un area.")
+                }
+                if(!this.idregional){
+                    this.validaMensaje.push("Seleccione un regional.")
+                }
+                if(!this.idempresa){
+                    this.validaMensaje.push("Seleccione una empresa.")
+                }
+                if(!this.idtipogasto){
+                    this.validaMensaje.push("Seleccione un tipo de gasto.")
+                }
+                if(!this.idespecifgasto){
+                    this.validaMensaje.push("Seleccione una especificacion de gasto.")
+                }
+                if(!this.idtiposolicitud){
+                    this.validaMensaje.push("Seleccione un tipo de solicitud.")
+                }
+                if(!this.idmoneda){
+                    this.validaMensaje.push("Seleccione moneda.")
+                }
+                if(!this.idmodopago){
+                    this.validaMensaje.push("Seleccione un modo de pago.")
+                }
+                if(!this.idcuenta){
+                    this.validaMensaje.push("Seleccione una cuenta.")
+                }
+                if(this.concepto.length<3 || this.concepto.length>256){
+                    this.validaMensaje.push("Escriba el concepto en menos de 256 caracteres.")
+                }
+                if(!this.idaprobador){
+                    this.validaMensaje.push("Seleccione un aprobador.")
+                }
+                if(this.total==0){
+                    this.validaMensaje.push("debe agregar detalles")
+                }
+                
+                for(var i=0;i<this.detalles.length;i++){
+                    if(this.detalles[i].monto==0){
+                        this.validaMensaje.push("los importes no deben ser igual a 0.");
+                    }
+                }
+                for(var i=0;i<this.detalles.length;i++){
+                    if(this.detalles[i].detalle==""){
+                        this.validaMensaje.push("falta detalle(s).");
+                    }
+                } 
+
+                if(this.validaMensaje.length){
+                    this.valida=1;
+                }
+               
+                return this.valida;
+            },
+
         }        
     }
 </script>
