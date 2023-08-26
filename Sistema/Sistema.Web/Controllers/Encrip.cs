@@ -13,13 +13,31 @@ namespace Sistema.Web.Controllers
     public class Encrip
     {
 
-        static readonly string password = "abc123";
+        private static string Thumbprintcert()
+        {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string certPath = Path.Combine(currentDirectory, "cert", "BCPCW_ENC_EMPRESA.pfx");
+            string pfxFilePath = certPath;
+            string pfxPassword = "abc123";
+
+            X509Certificate2 certificate = new X509Certificate2(pfxFilePath, pfxPassword);
+
+            // Obtener el thumbprint (huella digital) en formato hexadecimal
+            string thumbprint = certificate.Thumbprint;
+            return thumbprint = thumbprint.ToLower()+pfxPassword;
+             
+        }
         public static string Encrypt(string plainText)
         {
+
+            string password = Thumbprintcert();
+           
+
             if (plainText == null)
             {
                 return null;
             }
+
             // Get the bytes of the string
             var bytesToBeEncrypted = Encoding.UTF8.GetBytes(plainText);
             var passwordBytes = Encoding.UTF8.GetBytes(password);
@@ -43,6 +61,8 @@ namespace Sistema.Web.Controllers
             {
                 return null;
             }
+            string password = Thumbprintcert();
+
             // Get the bytes of the string
             var bytesToBeDecrypted = Convert.FromBase64String(encryptedText);
             var passwordBytes = Encoding.UTF8.GetBytes(password);
@@ -114,7 +134,7 @@ namespace Sistema.Web.Controllers
 
             return decryptedBytes;
         }
-        
+
 
     }
 }

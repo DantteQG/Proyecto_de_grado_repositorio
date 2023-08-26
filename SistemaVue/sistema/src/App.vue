@@ -18,23 +18,23 @@
               Inicio
             </v-list-item-title>
           </v-list-item>
-          <v-list-item :to="{ name: 'pivot'}">
+          <v-list-item :to="{ name: 'pivot'}" v-if="esAdministrador">
               <v-list-item-action>
                 <v-icon>home</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>
-                  Pivot
+                  Reporte de flujo de pagos
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'pivot2'}">
+            <v-list-item :to="{ name: 'pivot2'}" v-if="esAdministrador">
               <v-list-item-action>
                 <v-icon>home</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>
-                  Pivot2
+                  Reporte de flujo de pagos 2
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>      

@@ -15,6 +15,8 @@ using System.Text;
 using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json;
 using Sistema.Web.Models.Solicitud.OrdenBanco;
+using System.Security.Cryptography;
+using Sistema.Web.Models.Credinet.Aprobador;
 
 namespace Sistema.Web.Controllers
 {
@@ -34,110 +36,96 @@ namespace Sistema.Web.Controllers
         // POST: api/OrdenBancos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult> infoBanco([FromBody] OrdenBancoViewModel model)
+        public async Task<ActionResult> infoBancoProesa([FromBody] OrdenBancoViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
+            
+            List<CismartApprover> aprobadores;
             
 
-            var requestData = new RequestData
-            {
-                companyId = 001,
-                password = "pato123",
-                documentNumber = "1006843022", //NIT EMPRESA
-                documentType = "Q",
-                documentExtension = "LP",
-                documentComplement = "",
-                amount = 0.3, //MONTO
-                currency = "BOL", //MONEDA
-                fundSource = "GIRO COMERCIAL POR DISTRIBUION DE PRODCUTOS MASIVOS",
-                fundDestination = "destino de fondos",  //DESTINO DE FONDOS
-                sourceAccount = "20100000000000", //CUENTA SALIDA
-                sourceCurrency = "BOL", //MONEDA CUENTA
-                description = "desc", // DESCRIPCION
-                sendVouchers = "Dantte.quiroz@proesabol.com",//email
-                cismartApprovers = new List<CismartApprover>
-                    {
-                        new CismartApprover
-                        {
-                            idc = "04011574-Q-PO",//aprobadore1
-                            type = 1 //tipo J+G  tipo A+C
-
-                        },
-                        new CismartApprover
-                        {
-                            idc = "04011574-Q-PO",//aprobadore2
-                            type = 3 //tipo J+G  tipo A+C
-
-                        }
-                    },
-                spreadsheet = new Spreadsheet
+           aprobadores = new List<CismartApprover>
+           {
+                new CismartApprover
                 {
-                    formProvidersPayments = new List<FormProvidersPayment>
-                    {
-                        new FormProvidersPayment
+                    idc = "00255921-Q-LP 1A",//aprobadore1
+                    type = 1 //tipo J+G  tipo A+C
+                },
+           };
+
+            List<FormAchPayment> pagoACH;
+            List<FormProvidersPayment> pagoBCP;
+
+            if(model.tipopago == 1)
+            {
+                pagoBCP = new List<FormProvidersPayment>
+                {
+                    new FormProvidersPayment
                         {
                             paymentType = "PROV",  //PAGO A BCP
                             line = 1,
-                            accountNumber = "10000000000000",  //NUMERO DE CUENTA
-                            glossPayment = "glosa",   //CASO ****
-                            amount = 0.1,           //MONTO 
-                            documentType = "Q",  
-                            documentNumber = "0280000", //CI:0
-                            documentExtension = "",    // LP
+                            accountNumber = model.nrocuenta,  //NUMERO DE CUENTA
+                            glossPayment = model.concepto,   //CASO ****
+                            amount = model.monto,           //MONTO 
+                            documentType = "Q",
+                            documentNumber = "0", //CI:0
+                            documentExtension = "LP",    // LP
                             firstDetail = "",
                             secondDetail = "",
                             mail = ""   //MAIL DE USUARIO
                         }
-                    },
-                    formAchPayments = new List<FormAchPayment>
-                    {
-                        new FormAchPayment
+
+                };
+                pagoACH = new List<FormAchPayment>();
+            }
+            else
+            {
+                pagoACH = new List<FormAchPayment>
+                {
+                    new FormAchPayment
                         {
                             paymentType = "ACH",  //PAGO ACH
                             line = 1,
-                            accountNumber = "11111111", //NUMERO DE CUENTA
-                            titularName = "nombre de titular",  //NOMBRE DE CUENTA
-                            amount = 0.2,       //MONTO
+                            accountNumber = model.nrocuenta, //NUMERO DE CUENTA
+                            titularName = model.nombretitular,  //NOMBRE DE CUENTA
+                            firstLastName= "",
+                            amount = model.monto,       //MONTO
                             branchOfficeId = 201,       //SUCURSAL
-                            firstDetail = "detalle",    //CASO ****
                             mail = "",
-                            bankId = "1014"             //ID DEL BANCO DESTINO
+                            bankId = model.codigobanco             //ID DEL BANCO DESTINO
                         }
-                    },
-                    formOddPayments = new List<FormOddPayment> //NO SE USARA
-                    {
-                        new FormOddPayment
-                        {
-                            paymentType = "ODD",
-                            line = 1,
-                            accountNumber = "cuentaAdebitar",
-                            titularName = "William",
-                            firstLastName = "Ramos",
-                            secondLastName = "Kapquique",
-                            description = "pruebaDescripcion",
-                            glossPayment = "pruebaGlosa",
-                            amount = 0.3,
-                            documentType = "Q",
-                            documentNumber = "6030303",
-                            documentExtension = "LP",
-                            branchOfficeId = 201,
-                            firstDetail = "DET ODD",
-                            secondDetail = "SEC ODD",
-                            mail = "WRamos@bancred.com",
-                            bankId = "1014",
-                            commission = 0.1,
-                            CommissionCurrency = "BOL"
-                        }
-                    }
+                };
+                pagoBCP = new List<FormProvidersPayment>();
+            }
+
+            var requestDatas = new RequestData
+            {
+                companyId = 2295,
+                password = "pato123AB",
+                documentNumber = "4850147", //NIT EMPRESA
+                documentType = "Q",
+                documentExtension = "LP",
+                documentComplement = "",
+                amount = 32.00, //MONTO
+                currency = "BOL", //MONEDA
+                fundSource = "GIRO COMERCIAL POR DISTRIBUION DE PRODCUTOS MASIVOS",
+                fundDestination = model.concepto,  //DESTINO DE FONDOS
+                sourceAccount = "2011040905323", //CUENTA SALIDA
+                sourceCurrency = "BOL", //MONEDA CUENTA
+                cismartApprovers = aprobadores,
+                spreadsheet = new Spreadsheet
+                {
+                    formOddPayments = new List<FormOddPayment>(),
+                    formProvidersPayments = pagoBCP,
+                    formAchPayments = pagoACH
                 }
             };
-
+     
             // Serializar el objeto RequestData a una cadena JSON
-            string jsonDatabanco = JsonConvert.SerializeObject(requestData);
+            string jsonDatabanco = JsonConvert.SerializeObject(requestDatas);
+            
 
             string jsonDataEncrip = Encrip.Encrypt(jsonDatabanco);
 
@@ -153,18 +141,14 @@ namespace Sistema.Web.Controllers
 
             if (response != null)
             {
-                Console.WriteLine("Respuesta del servidor:");
-                Console.WriteLine(responseJson);
+                return BadRequest();
+                //Console.WriteLine("Respuesta del servidor:");
+                //Console.WriteLine(responseJson);
             }
 
-
-
-            return Ok();
+            return Ok(new { lote = result,code=code, message=message});
 
         }
-
-
-
 
         private static async Task<string> PostDataAsync(string jsonDataBanco)
         {
@@ -173,9 +157,9 @@ namespace Sistema.Web.Controllers
             using (var httpClientHandler = new HttpClientHandler())
             {
 
-                string username = "pato123AB";
+                string username = "pato123";
                 string password = "pato123AB";
-                string companyID = "proesa123";
+                string companyID = "2295";
 
                 string currentDirectory = Directory.GetCurrentDirectory();
 
@@ -197,7 +181,7 @@ namespace Sistema.Web.Controllers
 
                 // Agregar el certificado a la solicitud HTTP para autenticación
                 httpClientHandler.ClientCertificates.Add(certificate);
-             
+
 
                 using (var httpClient = new HttpClient(httpClientHandler))
                 {
@@ -208,7 +192,7 @@ namespace Sistema.Web.Controllers
                     httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", credentials);
 
                     // Agregar otros encabezados si es necesario
-                    httpClient.DefaultRequestHeaders.Add("Content-Type", "application/json");
+                    //httpClient.DefaultRequestHeaders.Add("Content-Type", "application/json");
                     httpClient.DefaultRequestHeaders.Add("Correlation-Id", "123");
 
                     var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -223,7 +207,7 @@ namespace Sistema.Web.Controllers
                     catch (HttpRequestException e)
                     {
                         // Manejar el error si la solicitud no es exitosa
-                        Console.WriteLine($"Error: {e.Message}");
+                        //Console.WriteLine($"Error: {e.Message}");
                         return null;
                     }
                 }

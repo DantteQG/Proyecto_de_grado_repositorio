@@ -574,6 +574,7 @@
                 this.id=item.idordendepago;
                 this.idusuario=item.idusuario;
                 this.nombreusuario=item.usuario;
+                this.estado=item.estado;
                 this.idarea=item.idarea;
                 this.idregional=item.idregional;
                 this.idempresa=item.idempresa;
@@ -621,6 +622,7 @@
                         'idordendepago':me.id,
                         'idusuario':me.idusuario,
                         'idaprobador':me.idaprobador,
+                        'idestado':me.idestado,
                         'idcontador':me.idcontador,
                         'idregional':me.idregional,
                         'idarea':me.idarea,
