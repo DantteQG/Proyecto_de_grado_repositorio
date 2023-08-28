@@ -197,8 +197,8 @@
                         <v-row>
                             <v-spacer></v-spacer>
                             <v-btn class="mt-2 mr-10" color="blue darken-1" @click="MostrarCargabanco" >Cargar banco Manual</v-btn>
+                            <v-btn class="mt-2 mr-10" color="blue darken-1"  @click.native="cargaBanco(1,0)">Cargar banco Api</v-btn>
                             <v-btn class="mt-2 mr-10" color="red darken-1" @click="cargaBanco(0,0)" >Rechazar</v-btn>
-                            <!-- <v-btn color="blue darken-1"  @click.native="cargaBanco(1,0)">Cargar banco Api</v-btn> -->
                             <v-btn class="mt-2" color="primary" @click="volver">Volver</v-btn> 
                             <v-spacer></v-spacer>
                         </v-row >
@@ -211,21 +211,6 @@
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
                                     <v-btn @click.native="close" rounded block elevation="10" color="blue" dark class="mb-3">Cerrar</v-btn>
-                                    <v-spacer></v-spacer>
-                                </v-card-actions>
-                            </v-card>
-                        </v-dialog>
-                        <v-dialog v-model="dialogAprobador" max-width="500px">
-                            <v-card>
-                                <v-card-title>
-                                <span class="headline">Se ha modificado el aprobador</span>
-                                </v-card-title>
-                                <v-card-text>
-                                hola
-                                </v-card-text>
-                                <v-card-actions>
-                                    <v-spacer></v-spacer>
-                                    <v-btn  @click.native="close" rounded block elevation="10" color="blue" dark class="mb-3">Cerrar</v-btn>
                                     <v-spacer></v-spacer>
                                 </v-card-actions>
                             </v-card>
@@ -242,28 +227,48 @@
                     <v-card-title>
                         <span class="headline">Cargar banco solicitud: {{id}}</span>
                     </v-card-title>
-        
                     <v-card-text>
                         <v-container grid-list-md>
                             <v-layout wrap>
-                                <v-flex xs12 sm12 md50>
-                                        <v-select v-model="idcuentasalida" 
-                                        :items="cuentasalidas" label="Banco salida"></v-select>
-                                    </v-flex>
-                                    <v-flex xs12 sm12 md12>
-                                        <v-text-field v-model="lote" label="Lote"></v-text-field>
-                                    </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                    <v-select v-model="idcuentasalida" 
+                                    :items="cuentasalidas" label="Banco salida"></v-select>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                    <v-row>
+                                        <v-text-field class="ml-3" v-model="nrocuenta" label="Cuenta"></v-text-field>
+                                        <v-spacer></v-spacer>
+                                        <v-text-field class="mr-3" v-model="bancocuenta" label="Cuenta"></v-text-field>
+                                    </v-row>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                    <v-text-field v-model="nombrecuenta" label="Cuenta"></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                    <v-row>
+                                        <v-text-field class="ml-3" v-model="total" label="Monto"></v-text-field>
+                                        <v-spacer></v-spacer>
+                                        <v-text-field class="mr-3" v-model="moneda" label="Moneda"></v-text-field>
+                                    </v-row>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                    <v-text-field v-model="conceptobanco" label="Concepto"></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                    <v-text-field v-model="lote" label="Lote"></v-text-field>
+                                </v-flex>
                             </v-layout>
                         </v-container>
                     </v-card-text>
-        
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn color="blue darken-1"  @click.native="cerrardialoglote">Cancelar</v-btn>
+                        <v-btn color="blue darken-1"  @click.native="cargaApi()">Cargar banco Api</v-btn>
                         <v-btn color="blue darken-1"  @click.native="cargaBanco(1,1)">Guardar</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
+            
         </v-flex>
     </v-layout>
 </template>
@@ -275,7 +280,6 @@
             return {
                 ordendepagos: [],
                 dialog: false,
-                dialogAprobador:false,
                 headers: [                    
                     { text: 'CASO', value: 'idordendepago'},
                     { text: 'Opciones', value: 'opciones'  } ,
@@ -330,6 +334,7 @@
                 idespecifgasto:'',
                 idtiposolicitud:'',
                 idmoneda:'',
+                moneda:'',
                 idmodopago:'',
                 idproyecto:'',
                 factura: false,
@@ -338,8 +343,13 @@
                 fechasolicitada:'',
                 fechaprogramada:'',
                 concepto:'',
+                conceptobanco:'',
                 idaprobador:'',
-                idcontador:'',                
+                idcontador:'',
+                nrocuenta:'',
+                nombrecuenta:'',
+                bancocuenta:'',
+                                
 
                 detalle:'',
                 nrodocumento:0,
@@ -623,13 +633,19 @@
                 this.idespecifgasto=item.idespecifgasto;
                 this.idtiposolicitud=item.idtiposolicitud;
                 this.idmoneda=item.idmoneda;
+                this.moneda=item.moneda;
                 this.idmodopago=item.idmodopago;
                 this.idproyecto=item.idproyecto;
                 this.factura=item.factura;
                 this.recibo=item.recibo;
                 this.editedIndex=1;
                 this.concepto=item.concepto;
+                this.conceptobanco=item.conceptobanco;
                 this.idcuenta=item.idcuenta;
+                this.nrocuenta=item.nrocuenta;
+                this.nombrecuenta=item.nombrecuenta;
+                this.bancocuenta=item.bancocuenta;
+                this.codigobanco=item.codigobanco;
                 this.idaprobador=item.idaprobador;
                 this.idcontador=item.idcontador;
 
@@ -642,7 +658,7 @@
             },
 
             close () {
-                this.dialogAprobador=false;
+                
                 this.dialog = false;
                 this.volver();
                 this.listar();
@@ -650,7 +666,15 @@
             },
 
             MostrarCargabanco(){
+                if(this.idempresa==1)
+                {
+                    this.idcuentasalida=1;
+                }
+                else{
+                    this.idcuentasalida=3;
+                }
                 this.dialoglote=1;
+                
             },
             cerrardialoglote(){
                 this.dialoglote=0;
@@ -745,13 +769,31 @@
                 }
             },
 
+            cargaApi(){
+                this.convertirnumero();
+                
+                let me=this;
+                me.total=me.total*1
+                axios.post('api/Ordenbancos/infoBancoProesa',{
+                    'nrocuenta':me.nrocuenta,
+                    'concepto':me.conceptobanco,
+                    'monto':me.total,
+                    'nombretitular':me.nombrecuenta,
+                    'codigobanco':me.codigobanco
+                }).then(function(response){ 
+                    me.lote=response.data.lote;
+                    //me.dialog=true;          
+                }).catch(function(error){
+                    console.log(error);
+                })
+            },
+
             cambiarAprobador(){
                 let me=this;
                 axios.put('api/Ordendepagos/Cambiaraprobador',{
                         'idordendepago':me.id,
                         'idaprobador':me.idaprobador,
                     }).then(function(response){            
-                        me.dialogAprobador=true;
                         me.validaMensaje=[];        
                     }).catch(function(error){
                         console.log(error);

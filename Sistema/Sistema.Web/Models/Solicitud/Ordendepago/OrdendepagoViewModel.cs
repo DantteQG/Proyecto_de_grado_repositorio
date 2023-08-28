@@ -39,8 +39,9 @@ namespace Sistema.Web.Models.Solicitud.Ordendepago
         public string cuenta { get; set; }
         public string nombrecuenta { get; set; }
         public int idbanco { get; set; }
-        public string bancocuenta { get; set; }
+        public string nrocuenta { get; set; }
         public int codigobanco { get; set; }
+        public string bancocuenta { get; set; }
         public string fechasolicitud { get; set; }
         public string fechaprogramada { get; set; }
         public bool factura { get; set; }

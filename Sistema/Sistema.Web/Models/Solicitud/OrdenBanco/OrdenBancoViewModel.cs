@@ -14,7 +14,7 @@ namespace Sistema.Web.Models.Solicitud.OrdenBanco
         public string emailboucher { get; set; }
         public string nrocuenta { get; set; }
         public string nrodecaso { get; set; }
-        public string codigobanco { get; set; }
+        public int codigobanco { get; set; }
         
         public string nombretitular { get; set; }
 

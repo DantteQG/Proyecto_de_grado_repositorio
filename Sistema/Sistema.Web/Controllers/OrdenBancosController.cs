@@ -35,8 +35,8 @@ namespace Sistema.Web.Controllers
 
         // POST: api/OrdenBancos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult> infoBancoProesa([FromBody] OrdenBancoViewModel model)
+        [HttpPost("[action]")]
+        public async Task<ActionResult> InfoBancoProesa([FromBody] OrdenBancoViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace Sistema.Web.Controllers
             List<FormAchPayment> pagoACH;
             List<FormProvidersPayment> pagoBCP;
 
-            if(model.tipopago == 1)
+            if(model.codigobanco == 11)
             {
                 pagoBCP = new List<FormProvidersPayment>
                 {
@@ -108,7 +108,7 @@ namespace Sistema.Web.Controllers
                 documentType = "Q",
                 documentExtension = "LP",
                 documentComplement = "",
-                amount = 32.00, //MONTO
+                amount = model.monto, //MONTO
                 currency = "BOL", //MONEDA
                 fundSource = "GIRO COMERCIAL POR DISTRIBUION DE PRODCUTOS MASIVOS",
                 fundDestination = model.concepto,  //DESTINO DE FONDOS
@@ -265,7 +265,7 @@ namespace Sistema.Web.Controllers
             public int branchOfficeId { get; set; }
             public string firstDetail { get; set; }
             public string mail { get; set; }
-            public string bankId { get; set; }
+            public int bankId { get; set; }
         }
 
         public class FormOddPayment
