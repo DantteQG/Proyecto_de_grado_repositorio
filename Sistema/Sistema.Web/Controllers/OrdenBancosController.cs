@@ -58,7 +58,7 @@ namespace Sistema.Web.Controllers
             List<FormAchPayment> pagoACH;
             List<FormProvidersPayment> pagoBCP;
 
-            if(model.codigobanco == 11)
+            if(model.codigobanco == 12)
             {
                 pagoBCP = new List<FormProvidersPayment>
                 {
@@ -138,8 +138,9 @@ namespace Sistema.Web.Controllers
             string result = responseJson.Result;
             string code = responseJson.Code;
             string message = responseJson.Message;
+            
 
-            if (response != null)
+            if (response == null)
             {
                 return BadRequest();
                 //Console.WriteLine("Respuesta del servidor:");
@@ -164,7 +165,7 @@ namespace Sistema.Web.Controllers
                 string currentDirectory = Directory.GetCurrentDirectory();
 
                 // Construir la ruta completa al certificado PFX
-                string certPath = Path.Combine(currentDirectory, "certf", "certificado.pfx");
+                string certPath = Path.Combine(currentDirectory, "cert", "BCPCW_API_EMPRESA.pfx");
 
 
                 var requestData = new

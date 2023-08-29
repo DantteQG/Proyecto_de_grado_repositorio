@@ -14,7 +14,7 @@ namespace Sistema.Entidades.Solicitud
     public class Ordendepago
     {
         public int idordendepago { get; set; }
-        [Required]
+        
         [ForeignKey("estado")]
         public int idestado { get; set; }
         [Required]

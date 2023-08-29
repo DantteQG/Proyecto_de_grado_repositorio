@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Kxq4J3W7zqFVow8PWPpWo15kXIEo7rVIK/gAglO76USf3ax8XW3z9mBENO8WTd0fiyXRSVVVYSQD05pee+BTCg==",
+  "dgSpecHash": "DEnlWhc38C1x4K6zEV97x0ALDTmj25uqmflMqPB9O7UKxVS/DWWJyiYlCQsZHAdNprDYr0bDf6sgopjnPL5moQ==",
   "success": true,
-  "projectFilePath": "C:\\proyecto\\Proyecto_de_grado_repositorio\\Sistema\\Sistema.Entidades\\Sistema.Entidades.csproj",
+  "projectFilePath": "C:\\Sistema ASP Net Core Vuejs\\Sistema\\Sistema.Entidades\\Sistema.Entidades.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

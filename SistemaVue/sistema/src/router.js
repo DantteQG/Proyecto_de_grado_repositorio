@@ -28,6 +28,7 @@ import Porconfirmar from './components/Porconfirmar.vue'
 import Cuentasalida from './components/Cuentasalida.vue'
 import Pivot from './components/pitot.vue'
 import Pivot2 from './components/pivot2.vue'
+import Porrendir from './components/Porrendir.vue'
 
 
 
@@ -290,6 +291,16 @@ var router = new Router({
       meta: {
         administrador: true,
         tesoreria: true,
+      }
+    },
+    {
+      path: '/porrendir',
+      name: 'porrendir',
+      component: Porrendir,
+      meta: {
+        administrador: true,
+        tesoreria: true,
+        contador: true
       }
     }
   ]

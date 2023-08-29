@@ -170,7 +170,7 @@
                             <template v-slot:[`item.monto`]="props">
                                 <td><v-text-field v-model="props.item.monto"></v-text-field></td>
                             </template>
-                            <template slot="no-data" black color="red">
+                            <template slot="no-data">
                                 <strong>DEBE AGREGAR EL DETALLE</strong>
                             </template>
                         </v-data-table>
@@ -300,6 +300,7 @@
                 adIdTipoGasto: '',
                 idusuario:'',
                 nombreusuario:'',
+                idestado:'',
                 idarea:'',
                 idregional:'',
                 idempresa:'',
@@ -593,7 +594,7 @@
                 this.idcuenta=item.idcuenta;
                 this.idaprobador=item.idaprobador;
                 this.idcontador=item.idcontador;
-
+                this.idestado=item.idestado;
                 let me=this;
                 this.Selectdinamic(me.idtipogasto);
                 this.idespecifgasto=item.idespecifgasto;

@@ -475,7 +475,7 @@ namespace Sistema.Web.Controllers
                 return NotFound();
             }
 
-            //ordendepago.idestado = model.idestado;
+            ordendepago.idestado = model.idestado;
             ordendepago.idusuario = model.idusuario;
             ordendepago.idregional = model.idregional;
             ordendepago.idarea = model.idarea;

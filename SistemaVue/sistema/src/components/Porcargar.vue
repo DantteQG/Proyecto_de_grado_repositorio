@@ -169,7 +169,7 @@
                             <template v-slot:[`item.monto`]="props">
                                 <td><v-text-field type="Number" v-model="props.item.monto"></v-text-field></td>
                             </template>
-                            <template slot="no-data" black color="red">
+                            <template slot="no-data">
                                 <strong>DEBE AGREGAR EL DETALLE</strong>
                             </template>
                         </v-data-table>
