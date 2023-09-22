@@ -196,8 +196,7 @@
                         </v-flex>
                         <v-row>
                             <v-spacer></v-spacer>
-                            <v-btn class="mt-2 mr-10" color="blue darken-1" @click="MostrarCargabanco" >Cargar banco Manual</v-btn>
-                            <v-btn class="mt-2 mr-10" color="blue darken-1"  @click.native="cargaBanco(1,0)">Cargar banco Api</v-btn>
+                            <v-btn class="mt-2 mr-10" color="blue darken-1" @click="MostrarCargabanco" >Cargar Banco </v-btn>
                             <v-btn class="mt-2 mr-10" color="red darken-1" @click="cargaBanco(0,0)" >Rechazar</v-btn>
                             <v-btn class="mt-2" color="primary" @click="volver">Volver</v-btn> 
                             <v-spacer></v-spacer>
@@ -256,6 +255,13 @@
                                 </v-flex>
                                 <v-flex xs12 sm12 md12>
                                     <v-text-field v-model="lote" label="Lote"></v-text-field>
+                                    <v-progress-circular v-if="espera"
+                                        color="primary"
+                                        indeterminate
+                                        :size="45"
+                                        :width="6"
+                                    ></v-progress-circular>
+                                    <v-label >{{ mensajebanco }}</v-label>
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -349,7 +355,8 @@
                 nrocuenta:'',
                 nombrecuenta:'',
                 bancocuenta:'',
-                                
+                espera:0,   
+                mensajebanco:"",             
 
                 detalle:'',
                 nrodocumento:0,
@@ -771,7 +778,7 @@
 
             cargaApi(){
                 this.convertirnumero();
-                
+                this.espera=1;
                 let me=this;
                 me.total=me.total*1
                 axios.post('api/Ordenbancos/infoBancoProesa',{
@@ -782,7 +789,10 @@
                     'codigobanco':me.codigobanco
                 }).then(function(response){ 
                     me.lote=response.data.lote;
-                    //me.dialog=true;          
+                    //me.dialog=true;  
+                    me.espera=0;
+                    me.mensajebanco=response.data.message;     
+                    console.log(me.mensajebanco)
                 }).catch(function(error){
                     console.log(error);
                 })

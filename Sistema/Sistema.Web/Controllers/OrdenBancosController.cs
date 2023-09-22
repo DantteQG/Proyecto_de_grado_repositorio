@@ -35,29 +35,31 @@ namespace Sistema.Web.Controllers
 
         // POST: api/OrdenBancos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
+        //Recibimos el Json desde el front end con los datos necesarios para el banco
         [HttpPost("[action]")]
         public async Task<ActionResult> InfoBancoProesa([FromBody] OrdenBancoViewModel model)
         {
+            //verificamos el modelo
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            
-            List<CismartApprover> aprobadores;
-            
-
+           
+           List<CismartApprover> aprobadores;
+           //la lista de aprobadores es proporiconada por el banco
            aprobadores = new List<CismartApprover>
            {
                 new CismartApprover
                 {
-                    idc = "00255921-Q-LP 1A",//aprobadore1
-                    type = 1 //tipo J+G  tipo A+C
+                    idc = "00255921-Q-LP 1A",//aprobador1
+                    type = 1 
                 },
            };
 
             List<FormAchPayment> pagoACH;
             List<FormProvidersPayment> pagoBCP;
-
+            //verificamos si en un ACH o propio bcp por el codigo del banco
             if(model.codigobanco == 12)
             {
                 pagoBCP = new List<FormProvidersPayment>
@@ -76,7 +78,6 @@ namespace Sistema.Web.Controllers
                             secondDetail = "",
                             mail = ""   //MAIL DE USUARIO
                         }
-
                 };
                 pagoACH = new List<FormAchPayment>();
             }
@@ -99,7 +100,7 @@ namespace Sistema.Web.Controllers
                 };
                 pagoBCP = new List<FormProvidersPayment>();
             }
-
+            //llenamos el Json completo con los datos anteriores
             var requestDatas = new RequestData
             {
                 companyId = 2295,
@@ -110,7 +111,7 @@ namespace Sistema.Web.Controllers
                 documentComplement = "",
                 amount = model.monto, //MONTO
                 currency = "BOL", //MONEDA
-                fundSource = "GIRO COMERCIAL POR DISTRIBUION DE PRODCUTOS MASIVOS",
+                fundSource = "FONDOS POR VENTA DE PRODUCTOS",
                 fundDestination = model.concepto,  //DESTINO DE FONDOS
                 sourceAccount = "2011040905323", //CUENTA SALIDA
                 sourceCurrency = "BOL", //MONEDA CUENTA
@@ -125,30 +126,26 @@ namespace Sistema.Web.Controllers
      
             // Serializar el objeto RequestData a una cadena JSON
             string jsonDatabanco = JsonConvert.SerializeObject(requestDatas);
-            
-
+            //Encriptar la cadena JSON
             string jsonDataEncrip = Encrip.Encrypt(jsonDatabanco);
-
+            //Enviar informacion al destino mediante una tarea asincrona,
+            //con los datos proporcionados por el banco
             string response = await PostDataAsync(jsonDataEncrip);
-
+            //Desencriptar la respuesta del banco
             string responseDecryp = Encrip.Decrypt(response);
-
+            // Deserializar la respuesta y dividir
             ApiResponse responseJson = JsonConvert.DeserializeObject<ApiResponse>(responseDecryp);
 
             string result = responseJson.Result;
             string code = responseJson.Code;
             string message = responseJson.Message;
-            
-
+            //verificar que la respuesta no sea nula
             if (response == null)
             {
-                return BadRequest();
-                //Console.WriteLine("Respuesta del servidor:");
-                //Console.WriteLine(responseJson);
+                return BadRequest();  
             }
-
+            //Enviar la respuesta al Front End 
             return Ok(new { lote = result,code=code, message=message});
-
         }
 
         private static async Task<string> PostDataAsync(string jsonDataBanco)
