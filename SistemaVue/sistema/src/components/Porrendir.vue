@@ -345,6 +345,7 @@
     export default {
         data(){
             return {
+                ordendepagos1: [],
                 ordendepagos: [],
                 dialog: false,
                 dialogAprobador:false,
@@ -484,6 +485,7 @@
                 {
                     //console.log(response);
                     me.ordendepagos=response.data;
+                    me.ordendepagos=me.ordendepagos.filter(od=>od.rendido == 0 && od.idestado!==5) //no rendido
                 }).catch(function(error){
                     console.log(error);
                 });

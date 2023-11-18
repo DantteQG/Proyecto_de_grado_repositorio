@@ -766,8 +766,8 @@
                     var pageHeigth = 295;
                     var imgHeigth = canvas.height * imgWidth / canvas.width;
                     var heightLeft = imgHeigth;
-                    var doc = new jsPDF('p', 'mm','a4');
-                     var position = 0;
+                    var doc = new jsPDF('p', 'mm','letter');
+                     var position = 15;
                      doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeigth);
                      doc.save('Solicituddefondos.pdf');
              });
@@ -780,10 +780,11 @@
         padding: 20px;
         font-family: Arial, sans-serif;
         font-size: 16px ;
+        color: rgb(0, 0, 0);
     }
     #titulo {
         float: center;
-        font-size: 22px;
+        font-size: 28px;
         text-align: center;
         font-weight: bold;
     }
@@ -794,7 +795,7 @@
         text-align: center;
     }
     #imagen {
-        width: 120px;
+        width: 180px;
     }
 
     #nrosolicitud {
