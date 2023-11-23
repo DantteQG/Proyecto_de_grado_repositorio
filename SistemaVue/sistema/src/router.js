@@ -28,6 +28,7 @@ import Porconfirmar from './components/Porconfirmar.vue'
 import Cuentasalida from './components/Cuentasalida.vue'
 import Pivot from './components/pitot.vue'
 import Pivot2 from './components/pivot2.vue'
+import Pivot3 from './components/pivot3.vue'
 import Porrendir from './components/Porrendir.vue'
 import Rendido from './components/Rendido.vue'
 
@@ -71,6 +72,13 @@ var router = new Router({
       path: '/pivot2',
       name: 'pivot2',
       component: Pivot2,
+      meta: {
+        libre: true
+      }
+    },{
+      path: '/pivot3',
+      name: 'pivot3',
+      component: Pivot3,
       meta: {
         libre: true
       }

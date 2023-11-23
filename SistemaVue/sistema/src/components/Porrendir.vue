@@ -188,7 +188,7 @@
                     <v-container class="mt-5">
                         <v-row aling="center" cols="6" sm="1">
                             <v-spacer></v-spacer>
-                            <v-btn class="mt-2 mr-10" color="green darken-1" @click="cambiarAprobador" >Cambiar contador</v-btn>
+                            <v-btn class="mt-2 mr-10" color="green darken-1" @click="cambiarContador" >Cambiar contador</v-btn>
                             <v-subheader>Contabilidad:</v-subheader>
                             
                             <v-select class="mr-10" v-model="idcontador" :items="Contadores" label="Selecione un encargado de contabilidad" outlined></v-select>
@@ -220,13 +220,13 @@
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
-                        <v-dialog v-model="dialogAprobador" max-width="500px">
+                        <v-dialog v-model="dialogContador" max-width="500px">
                             <v-card>
                                 <v-card-title>
-                                <span class="headline">Se ha modificado el aprobador</span>
+                                <span class="headline">Se ha modificado el contador</span>
                                 </v-card-title>
                                 <v-card-text>
-                                hola
+                                -------
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
@@ -234,7 +234,7 @@
                                     <v-spacer></v-spacer>
                                 </v-card-actions>
                             </v-card>
-                        </v-dialog>                  
+                        </v-dialog>             
                     </v-container>
                 </template>
                 <v-flex xs12 sm12 md12 v-show="valida">
@@ -355,7 +355,7 @@
                 ordendepagos1: [],
                 ordendepagos: [],
                 dialog: false,
-                dialogAprobador:false,
+                dialogContador:false,
                 headers: [                    
                     { text: 'CASO', value: 'idordendepago'},
                     { text: 'Opciones', value: 'opciones'  } ,
@@ -723,7 +723,7 @@
             },
 
             close () {
-                this.dialogAprobador=false;
+                this.dialogContador=false;
                 this.dialog = false;
                 this.volver();
                 this.listar();
@@ -742,6 +742,19 @@
                  }).catch(function(error){
                     console.log(error);
                 });
+            },
+
+            cambiarContador(){
+                let me=this;
+                axios.put('api/Ordendepagos/Cambiarcontador',{
+                        'idordendepago':me.id,
+                        'idcontador':me.idcontador,
+                    }).then(function(response){            
+                        me.dialogContador=true;
+                        me.validaMensaje=[];        
+                    }).catch(function(error){
+                        console.log(error);
+                    })
             },
             
             mostrarSolicitud(item){

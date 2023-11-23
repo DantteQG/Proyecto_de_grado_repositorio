@@ -37,7 +37,17 @@
                   Reporte de flujo de pagos 2
                 </v-list-item-title>
               </v-list-item-content>
-            </v-list-item>      
+            </v-list-item>  
+            <v-list-item :to="{ name: 'pivot3'}" v-if="esAdministrador">
+              <v-list-item-action>
+                <v-icon>home</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>
+                  Reporte de flujo de pagos 3
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>        
         </template>
         
         <template v-if="esAdministrador">

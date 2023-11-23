@@ -10,11 +10,11 @@
         "projectUniqueName": "C:\\proyecto\\Proyecto_de_grado_repositorio\\Sistema\\Sistema.Datos\\Sistema.Datos.csproj",
         "projectName": "Sistema.Datos",
         "projectPath": "C:\\proyecto\\Proyecto_de_grado_repositorio\\Sistema\\Sistema.Datos\\Sistema.Datos.csproj",
-        "packagesPath": "C:\\Users\\dantt\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Dantte Quiroz\\.nuget\\packages\\",
         "outputPath": "C:\\proyecto\\Proyecto_de_grado_repositorio\\Sistema\\Sistema.Datos\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\dantt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dantte Quiroz\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -71,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -81,11 +81,11 @@
         "projectUniqueName": "C:\\proyecto\\Proyecto_de_grado_repositorio\\Sistema\\Sistema.Entidades\\Sistema.Entidades.csproj",
         "projectName": "Sistema.Entidades",
         "projectPath": "C:\\proyecto\\Proyecto_de_grado_repositorio\\Sistema\\Sistema.Entidades\\Sistema.Entidades.csproj",
-        "packagesPath": "C:\\Users\\dantt\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Dantte Quiroz\\.nuget\\packages\\",
         "outputPath": "C:\\proyecto\\Proyecto_de_grado_repositorio\\Sistema\\Sistema.Entidades\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\dantt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dantte Quiroz\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -126,7 +126,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

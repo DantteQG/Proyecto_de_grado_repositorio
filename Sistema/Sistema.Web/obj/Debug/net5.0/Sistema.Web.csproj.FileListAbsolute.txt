@@ -444,3 +444,8 @@ C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Web\obj\Debug\net5.0\S
 C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Web\obj\Debug\net5.0\ref\Sistema.Web.dll
 C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Web\bin\Debug\net5.0\Novell.Directory.Ldap.NETStandard.dll
 C:\Sistema ASP Net Core Vuejs\Sistema\Sistema.Web\bin\Debug\net5.0\Novell.Directory.Ldap.NETStandard.dll
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Web\obj\Debug\net5.0\staticwebassets\Sistema.Web.StaticWebAssets.Pack.cache
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Web\obj\Debug\net5.0\staticwebassets\msbuild.Sistema.Web.Microsoft.AspNetCore.StaticWebAssets.props
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Web\obj\Debug\net5.0\staticwebassets\msbuild.build.Sistema.Web.props
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Web\obj\Debug\net5.0\staticwebassets\msbuild.buildMultiTargeting.Sistema.Web.props
+C:\proyecto\Proyecto_de_grado_repositorio\Sistema\Sistema.Web\obj\Debug\net5.0\staticwebassets\msbuild.buildTransitive.Sistema.Web.props

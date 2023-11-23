@@ -595,6 +595,43 @@ namespace Sistema.Web.Controllers
 
 
         [HttpPut("[action]")]
+        public async Task<IActionResult> Cambiarcontador([FromBody] ActContadorViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (model.idordendepago <= 0)
+            {
+                return BadRequest();
+            }
+
+            var ordendepago = await _context.Ordendepagos.FirstOrDefaultAsync(op => op.idordendepago == model.idordendepago);
+
+            if (ordendepago == null)
+            {
+                return NotFound();
+            }
+
+            ordendepago.idcontador = model.idcontador;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                //Guardar Excepcion
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+
+        [HttpPut("[action]")]
         public async Task<IActionResult> Rendido([FromBody] ActRendidoViewModel model)
         {
             if (!ModelState.IsValid)
