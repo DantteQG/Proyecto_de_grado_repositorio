@@ -29,7 +29,7 @@ import Cuentasalida from './components/Cuentasalida.vue'
 import Pivot from './components/pitot.vue'
 import Pivot2 from './components/pivot2.vue'
 import Porrendir from './components/Porrendir.vue'
-
+import Rendido from './components/Rendido.vue'
 
 
 Vue.use(Router)
@@ -143,7 +143,8 @@ var router = new Router({
       meta: {
         administrador: true,
         creadorcuenta: true,       
-        contador: true
+        contador: true,
+        tesoreria: true
       }
     },
     {
@@ -297,6 +298,16 @@ var router = new Router({
       path: '/porrendir',
       name: 'porrendir',
       component: Porrendir,
+      meta: {
+        administrador: true,
+        tesoreria: true,
+        contador: true
+      }
+    },
+    {
+      path: '/rendido',
+      name: 'rendido',
+      component: Rendido,
       meta: {
         administrador: true,
         tesoreria: true,

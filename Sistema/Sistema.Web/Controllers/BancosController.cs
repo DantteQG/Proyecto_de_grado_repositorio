@@ -34,7 +34,8 @@ namespace Sistema.Web.Controllers
                 alias = b.alias,
                 descripcion = b.descripcion,
                 condicion = b.condicion,
-                codigobanco=b.codigobanco
+                codigobanco=b.codigobanco,
+                cuentanacional=b.cuentanacional
             });
         }
 
@@ -102,6 +103,7 @@ namespace Sistema.Web.Controllers
             banco.alias = model.alias;
             banco.descripcion = model.descripcion;
             banco.codigobanco = model.codigobanco;
+            banco.cuentanacional=model.cuentanacional;
 
             try
             {
@@ -132,7 +134,8 @@ namespace Sistema.Web.Controllers
                 alias = model.alias,
                 descripcion = model.descripcion,
                 condicion = true,
-                codigobanco = model.codigobanco
+                codigobanco = model.codigobanco,
+                cuentanacional=model.cuentanacional
             };
 
             _context.Bancos.Add(banco);

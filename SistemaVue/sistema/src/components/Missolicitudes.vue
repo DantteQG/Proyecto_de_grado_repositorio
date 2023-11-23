@@ -292,7 +292,6 @@
                                     <strong>Cuenta: </strong> {{cuenta}}<br><br>
                                 </div>
                             </section>
-
                             <section>
                                 <div id="concepto">
                                     <strong>Concepto: </strong> {{concepto}}<br><br>
@@ -395,6 +394,7 @@
                 adIdTipoGasto: '',
                 idusuario:'',
                 nombreusuario:'',
+                idestado:'',                
                 idarea:'',
                 idregional:'',
                 idempresa:'',
@@ -461,7 +461,6 @@
                 }
                 return resultado;
             }
-        
         },
 
         watch: {
@@ -687,6 +686,7 @@
                 this.id=item.idordendepago;
                 this.idusuario=item.idusuario;
                 this.nombreusuario=item.usuario;
+                this.estado=item.estado;
                 this.idarea=item.idarea;
                 this.idregional=item.idregional;
                 this.idempresa=item.idempresa;
@@ -750,8 +750,6 @@
                     this.rec="NO";
                 }
                 this.listardetalle(item.idordendepago)
-
-
                 this.solicitudModal=1;
             },
             ocultarSolicitud(){

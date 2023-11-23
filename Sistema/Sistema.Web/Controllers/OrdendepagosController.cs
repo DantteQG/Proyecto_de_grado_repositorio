@@ -594,6 +594,43 @@ namespace Sistema.Web.Controllers
         }
 
 
+        [HttpPut("[action]")]
+        public async Task<IActionResult> Rendido([FromBody] ActRendidoViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (model.idordendepago <= 0)
+            {
+                return BadRequest();
+            }
+
+            var ordendepago = await _context.Ordendepagos.FirstOrDefaultAsync(op => op.idordendepago == model.idordendepago);
+
+            if (ordendepago == null)
+            {
+                return NotFound();
+            }
+
+            ordendepago.rendido = model.rendido;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                //Guardar Excepcion
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+
         // GET: api/Ordendepagos/pivot
         [HttpGet("[action]")]
         public async Task<IEnumerable<PivotViewModel>> Pivot()

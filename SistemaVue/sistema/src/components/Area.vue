@@ -15,16 +15,13 @@
                     <template v-slot:activator="{ on }">
                         <v-btn slot="activator" color="primary" dark class="mb-2" v-on="on">Nuevo</v-btn>
                     </template>
-                
                     <v-card>
                         <v-card-title>
                             <span class="headline">{{ formTitle }}</span>
                         </v-card-title>
-            
                         <v-card-text>
                             <v-container grid-list-md>
                                 <v-layout wrap>
-
                                     <v-flex xs12 sm12 md12>
                                         <v-text-field v-model="nombre" label="Nombre"></v-text-field>
                                     </v-flex>
@@ -32,15 +29,11 @@
                                         <v-text-field v-model="descripcion" label="Descripcion"></v-text-field>
                                     </v-flex>
                                     <v-flex xs12 sm12 md12 v-show="valida">
-                                        <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v">
-
-                                        </div>
+                                        <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v"></div>
                                     </v-flex>
-                            
                                 </v-layout>
                             </v-container>
                         </v-card-text>
-            
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn color="blue darken-1" @click.native="close">Cancelar</v-btn>

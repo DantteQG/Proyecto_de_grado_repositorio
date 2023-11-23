@@ -42,7 +42,7 @@
                     </template>
                     <template v-slot:[`item.Cambiar`]="{ item }">
                         <td class=" justify-center">
-                            <v-icon color="blue" @click="marcarRendido(item)">check</v-icon>
+                            <v-icon color="red" @click="marcarRendido(item)">block</v-icon>
                         </td>
                     </template>
                     <template slot="no-data">
@@ -188,9 +188,7 @@
                     <v-container class="mt-5">
                         <v-row aling="center" cols="6" sm="1">
                             <v-spacer></v-spacer>
-                            <v-btn class="mt-2 mr-10" color="green darken-1" @click="cambiarAprobador" >Cambiar contador</v-btn>
                             <v-subheader>Contabilidad:</v-subheader>
-                            
                             <v-select class="mr-10" v-model="idcontador" :items="Contadores" label="Selecione un encargado de contabilidad" outlined></v-select>
                         </v-row>
                         <v-row aling="center" cols="6" sm="2">
@@ -450,10 +448,6 @@
                 estado:'',
                 cuenta:'',
                 moneda:''
-                
-
-
-
             }
         },
         computed: {
@@ -493,7 +487,7 @@
                 {
                     //console.log(response);
                     me.ordendepagos=response.data;
-                    me.ordendepagos=me.ordendepagos.filter(od=>od.rendido == 0 && od.idestado!==5 && od.idcontador==adidusuario) //no rendido
+                    me.ordendepagos=me.ordendepagos.filter(od=>od.rendido == 1 && od.idestado!==5 && od.idcontador==adidusuario) //no rendido
                 }).catch(function(error){
                     console.log(error);
                 });
@@ -735,7 +729,7 @@
                 me.adId=item.idordendepago;
                 axios.put('api/Ordendepagos/Rendido',{
                     'idordendepago':me.adId,
-                    'rendido':true,
+                    'rendido':false,
                 }).then(function(response){            
                     me.adId="";     
                     me.listar();            

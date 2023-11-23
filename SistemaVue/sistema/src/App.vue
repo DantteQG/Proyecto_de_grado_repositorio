@@ -314,7 +314,17 @@
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'porrendir'}">
+            <v-list-item :to="{ name: 'ordendepagos'}">
+              <v-list-item-action>
+                <v-icon>table_chart</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>
+                  Todas las solicitudes
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item v-if="esContador" :to="{ name: 'porrendir'}">
               <v-list-item-action>
                 <v-icon>table_chart</v-icon>
               </v-list-item-action>
@@ -324,7 +334,7 @@
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: ''}">
+            <v-list-item v-if="esContador" :to="{ name: 'rendido'}">
               <v-list-item-action>
                 <v-icon>table_chart</v-icon>
               </v-list-item-action>
@@ -339,9 +349,6 @@
       </v-list>
       <!--  -->
     </v-navigation-drawer>
-
-
-
 
     <v-app-bar app>   
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>

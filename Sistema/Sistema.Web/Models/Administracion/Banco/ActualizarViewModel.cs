@@ -18,5 +18,7 @@ namespace Sistema.Web.Models.Administracion.Banco
 
         [Required]
         public int codigobanco { get; set; }
+
+        public bool cuentanacional { get; set; }
     }
 }

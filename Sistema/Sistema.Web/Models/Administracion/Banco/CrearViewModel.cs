@@ -15,6 +15,7 @@ namespace Sistema.Web.Models.Administracion.Banco
         [StringLength(256)]
         public string descripcion { get; set; }
         public int codigobanco { get; set; }
+        public bool cuentanacional { get; set; }    
 
     }
 }

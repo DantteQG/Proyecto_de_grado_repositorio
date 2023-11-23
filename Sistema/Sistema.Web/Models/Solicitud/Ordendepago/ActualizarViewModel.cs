@@ -13,7 +13,6 @@ namespace Sistema.Web.Models.Solicitud.Ordendepago
         [Required]
         public int idordendepago { get; set; }
         public int idestado { get; set; }
-        [Required]
         public int idusuario { get; set; }
         public int idregional { get; set; }
         public int idarea { get; set; }

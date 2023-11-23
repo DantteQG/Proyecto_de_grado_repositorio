@@ -40,9 +40,11 @@
                                     <v-flex xs12 sm12 md12>
                                         <v-text-field v-model="codigobanco" label="Codigobanco"></v-text-field>
                                     </v-flex>
+                                    <v-flex xs12 sm12 md12>
+                                        <v-checkbox v-model="cuentanacional" color="blue" label="Internacional" row></v-checkbox> 
+                                    </v-flex>
                                     <v-flex xs12 sm12 md12 v-show="valida">
                                         <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v">
-
                                         </div>
                                     </v-flex>
                             
@@ -129,6 +131,14 @@
                     <td>{{ props.item.codigobanco }}</td>               
                 </template>
 
+                <template v-slot:[`item.cuentanacional`]="{ item }">
+                    <div v-if="item.cuentanacional==true">
+                        <span class="blue--text">Nacional</span>
+                    </div>
+                    <div v-if="item.cuentanacional==false">
+                        <span class="green--text">internacional</span>
+                    </div>
+                </template>
                 <template v-slot:[`item.condicion`]="{ item }">
                     <div v-if="item.condicion==1">
                         <span class="blue--text">Activo</span>
@@ -137,6 +147,7 @@
                         <span class="red--text">Inactivo</span>
                     </div>
                 </template>
+                
                     
 
                   
@@ -161,8 +172,12 @@
                     { text: 'Alias', value: 'alias' },
                     { text: 'Descripcion', value: 'descripcion', sortable: false },
                     { text: 'Codigo bcp', value: 'codigobanco' },
+                    { text: 'Cuenta', value: 'cuentanacional' },
                     { text: 'Estado', value: 'condicion' }
-   
+                ],
+                Cuentanacional:[
+                    { text:'Nacional', value:'1'},
+                    { text:'Internacional', value:'0'}
                 ],
                 search: '',
                 editedIndex: -1,
@@ -171,6 +186,7 @@
                 alias: '',
                 descripcion: '',
                 codigobanco: 0,
+                cuentanacional:0,
                 valida: 0,
                 validaMensaje:[],
                 adModal: 0,
@@ -201,7 +217,7 @@
                 let me=this;
                 axios.get('api/Bancos/Listar').then(function(response)
                 {
-                    console.log(response);
+                    //console.log(response);
                     me.bancos=response.data;
 
                 }).catch(function(error){
@@ -216,6 +232,7 @@
                 this.alias=item.alias;
                 this.descripcion=item.descripcion;
                 this.codigobanco=item.codigobanco;
+                this.cuentanacional=!item.cuentanacional;
                 this.editedIndex=1;
                 this.dialog = true
             },
@@ -256,7 +273,8 @@
                         'nombre':me.nombre,
                         'alias':me.alias,
                         'descripcion':me.descripcion,
-                        'codigobanco':me.codigobanco
+                        'codigobanco':me.codigobanco,
+                        'cuentanacional':!me.cuentanacional
                     }).then(function(response){            
                         me.close();
                         me.listar();
@@ -272,7 +290,8 @@
                         'nombre':me.nombre,
                         'alias':me.alias,
                         'descripcion':me.descripcion,
-                        'codigobanco':me.codigobanco
+                        'codigobanco':me.codigobanco,
+                        'cuentanacional':!me.cuentanacional
                     }).then(function(response){            
                         me.close();
                         me.listar();

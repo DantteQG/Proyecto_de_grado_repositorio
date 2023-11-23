@@ -20,6 +20,7 @@ namespace Sistema.Entidades.Administracion
         public bool condicion { get; set; }
         
         public int codigobanco { get; set; }
+        public bool cuentanacional { get; set; }
 
         public ICollection<Cuenta> cuenta { get; set; }
        
