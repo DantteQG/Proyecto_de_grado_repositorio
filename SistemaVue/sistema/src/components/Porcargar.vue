@@ -781,7 +781,7 @@
                 this.espera=1;
                 let me=this;
                 me.total=me.total*1
-                axios.post('api/Ordenbancos/infoBancoProesa',{
+                axios.post('api/Ordenbancos/infoBancoLog',{
                     'nrocuenta':me.nrocuenta,
                     'concepto':me.conceptobanco,
                     'monto':me.total,
