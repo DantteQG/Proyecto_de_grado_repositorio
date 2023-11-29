@@ -684,6 +684,7 @@ namespace Sistema.Web.Controllers
             {
                 fechapromada = a.fechaprogramada.ToString("MM-dd"),
                 especifgasto = a.especifgasto.nombre,
+                nombretipogasto = a.especifgasto.tipogasto.nombre,
                 total = a.total
 
             });

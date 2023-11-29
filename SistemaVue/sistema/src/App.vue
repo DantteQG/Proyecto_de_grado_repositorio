@@ -10,44 +10,47 @@
           <v-btn  :to="{ name: 'nuevasolicitudes'}" rounded block elevation="10" color="blue" dark class="mb-3">Nuevo</v-btn>
         </template>
         <template v-if="esAdministrador || esIniciador || esAprobador || esContador || esCreadorcuenta || esTesoreria">
-          <v-list-item :to="{ name: 'home'}">
+          <!-- <v-list-item :to="{ name: 'home'}">
             <v-list-item-action>
               <v-icon>home</v-icon>
             </v-list-item-action>
             <v-list-item-title>
               Inicio
             </v-list-item-title>
-          </v-list-item>
-          <v-list-item :to="{ name: 'pivot'}" v-if="esAdministrador">
-              <v-list-item-action>
-                <v-icon>home</v-icon>
-              </v-list-item-action>
+          </v-list-item> -->
+
+          <template v-if="esAdministrador || esTesoreria">
+          <v-list-group>
+            <v-list-item slot="activator">
               <v-list-item-content>
                 <v-list-item-title>
-                  Reporte de flujo de pagos
+                  REPORTES
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'pivot2'}" v-if="esAdministrador">
+          <v-list-item :to="{ name: 'pivot'}">
               <v-list-item-action>
                 <v-icon>home</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>
-                  Reporte de flujo de pagos 2
+                  Reporte flujo de pagos dia
                 </v-list-item-title>
               </v-list-item-content>
-            </v-list-item>  
-            <v-list-item :to="{ name: 'pivot3'}" v-if="esAdministrador">
+            </v-list-item>
+            
+            <v-list-item :to="{ name: 'pivot3'}" >
               <v-list-item-action>
                 <v-icon>home</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>
-                  Reporte de flujo de pagos 3
+                  Reporte BI
                 </v-list-item-title>
               </v-list-item-content>
-            </v-list-item>        
+            </v-list-item>    
+           </v-list-group>
+            </template>    
         </template>
         
         <template v-if="esAdministrador">
@@ -201,7 +204,7 @@
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'bancos'}">
+            <v-list-item :to="{ name: 'bancos'}" v-if="esAdministrador || esTesoreria">
               <v-list-item-action>
                 <v-icon>table_chart</v-icon>
               </v-list-item-action>

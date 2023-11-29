@@ -35,7 +35,7 @@ namespace Sistema.Web.Controllers
 
         // POST: api/OrdenBancos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        
+
         //Recibimos el Json desde el front end con los datos necesarios para el banco
         [HttpPost("[action]")]
         public async Task<ActionResult> InfoBancoProesa([FromBody] OrdenBancoViewModel model)
@@ -45,22 +45,22 @@ namespace Sistema.Web.Controllers
             {
                 return BadRequest(ModelState);
             }
-           
-           List<CismartApprover> aprobadores;
-           //la lista de aprobadores es proporiconada por el banco
-           aprobadores = new List<CismartApprover>
+
+            List<CismartApprover> aprobadores;
+            //la lista de aprobadores es proporiconada por el banco
+            aprobadores = new List<CismartApprover>
            {
                 new CismartApprover
                 {
                     idc = "00255921-Q-LP 1A",//aprobador1
-                    type = 1 
+                    type = 1
                 },
            };
 
             List<FormAchPayment> pagoACH;
             List<FormProvidersPayment> pagoBCP;
             //verificamos si en un ACH o propio bcp por el codigo del banco
-            if(model.codigobanco == 12)
+            if (model.codigobanco == 12)
             {
                 pagoBCP = new List<FormProvidersPayment>
                 {
@@ -95,7 +95,7 @@ namespace Sistema.Web.Controllers
                             amount = model.monto,       //MONTO
                             branchOfficeId = 201,       //SUCURSAL
                             mail = "",
-                            bankId = model.codigobanco             //ID DEL BANCO DESTINO
+                            bankId = model.codigobanco     //ID DEL BANCO DESTINO
                         }
                 };
                 pagoBCP = new List<FormProvidersPayment>();
@@ -123,7 +123,7 @@ namespace Sistema.Web.Controllers
                     formAchPayments = pagoACH
                 }
             };
-     
+
             // Serializar el objeto RequestData a una cadena JSON
             string jsonDatabanco = JsonConvert.SerializeObject(requestDatas);
             //Encriptar la cadena JSON
@@ -142,10 +142,10 @@ namespace Sistema.Web.Controllers
             //verificar que la respuesta no sea nula
             if (response == null)
             {
-                return BadRequest();  
+                return BadRequest();
             }
             //Enviar la respuesta al Front End 
-            return Ok(new { lote = result,code=code, message=message});
+            return Ok(new { lote = result, code = code, message = message });
         }
 
         private static async Task<string> PostDataAsync(string jsonDataBanco)
@@ -211,12 +211,192 @@ namespace Sistema.Web.Controllers
                 }
             }
         }
-    
+
+        [HttpPost("[action]")]
+        public async Task<ActionResult> InfoBancoLog([FromBody] OrdenBancoViewModel model)
+        {
+            //verificamos el modelo
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            List<CismartApprover> aprobadores;
+            //la lista de aprobadores es proporiconada por el banco
+            aprobadores = new List<CismartApprover>
+           {
+                new CismartApprover
+                {
+                    idc = "2315726-Q-LP",//aprobador1 KR
+                    type = 1
+                },
+                //new CismartApprover
+                //{
+                //    idc = "466517-Q-LP 3C",//aprobador1 LR
+                //    type = 3
+                //},
+           };
+
+            List<FormAchPayment> pagoACH;
+            List<FormProvidersPayment> pagoBCP;
+            //verificamos si en un ACH o propio bcp por el codigo del banco
+            if (model.codigobanco == 12)
+            {
+                pagoBCP = new List<FormProvidersPayment>
+                {
+                    new FormProvidersPayment
+                        {
+                            paymentType = "PROV",  //PAGO A BCP
+                            line = 1,
+                            accountNumber = model.nrocuenta,  //NUMERO DE CUENTA
+                            glossPayment = model.concepto,   //CASO ****
+                            amount = model.monto,           //MONTO 
+                            documentType = "Q",
+                            documentNumber = "0", //CI:0
+                            documentExtension = "LP",    // LP
+                            firstDetail = "",
+                            secondDetail = "",
+                            mail = ""   //MAIL DE USUARIO
+                        }
+                };
+                pagoACH = new List<FormAchPayment>();
+            }
+            else
+            {
+                pagoACH = new List<FormAchPayment>
+                {
+                    new FormAchPayment
+                        {
+                            paymentType = "ACH",  //PAGO ACH
+                            line = 1,
+                            accountNumber = model.nrocuenta, //NUMERO DE CUENTA
+                            titularName = model.nombretitular,  //NOMBRE DE CUENTA
+                            firstLastName= "",
+                            amount = model.monto,       //MONTO
+                            branchOfficeId = 201,       //SUCURSAL
+                            mail = "",
+                            bankId = model.codigobanco            //ID DEL BANCO DESTINO
+                        }
+                };
+                pagoBCP = new List<FormProvidersPayment>();
+            }
+            //llenamos el Json completo con los datos anteriores
+            var requestDatas = new RequestData
+            {
+                companyId = 103136,
+                password = "LogMark2023", ///"7nq6hxRu&rw0#LyJ",
+                documentNumber = "1000002", //NIT EMPRESA
+                documentType = "Q",
+                documentExtension = "SN",
+                documentComplement = "",
+                amount = model.monto, //MONTO
+                currency = "BOL", //MONEDA
+                fundSource = "GIRO COMERCIAL POR DISTRIBUCION DE PRODUCTOS MASIVOS",
+                fundDestination = model.concepto,  //DESTINO DE FONDOS
+                sourceAccount = "2015046782327", //CUENTA SALIDA
+                sourceCurrency = "BOL", //MONEDA CUENTA
+                cismartApprovers = aprobadores,
+                spreadsheet = new Spreadsheet
+                {
+                    formOddPayments = new List<FormOddPayment>(),
+                    formProvidersPayments = pagoBCP,
+                    formAchPayments = pagoACH
+                }
+            };
+
+            // Serializar el objeto RequestData a una cadena JSON
+            string jsonDatabanco = JsonConvert.SerializeObject(requestDatas);
+            //Encriptar la cadena JSON
+            string jsonDataEncrip = Encrip.Encrypt(jsonDatabanco);
+            //Enviar informacion al destino mediante una tarea asincrona,
+            //con los datos proporcionados por el banco
+            string response = await PostDataAsyncLog(jsonDataEncrip);
+            //Desencriptar la respuesta del banco
+            string responseDecryp = Encrip.Decrypt(response);
+            // Deserializar la respuesta y dividir
+            ApiResponse responseJson = JsonConvert.DeserializeObject<ApiResponse>(responseDecryp);
+
+            string result = responseJson.Result;
+            string code = responseJson.Code;
+            string message = responseJson.Message;
+            //verificar que la respuesta no sea nula
+            if (response == null)
+            {
+                return BadRequest();
+            }
+            //Enviar la respuesta al Front End 
+            return Ok(new { lote = result, code = code, message = message });
+        }
+
+        private static async Task<string> PostDataAsyncLog(string jsonDataBanco)
+        {
+            string url = "https://credinetweb.bcp.com.bo/ApiGatewayCw/APIAuthentication/api/APIAuthentication/PreparerBatch";
+
+            using (var httpClientHandler = new HttpClientHandler())
+            {
+
+                string username = "USRCWLOGMA";
+                string password = "j96hs&YUmy0rB!ix";
+                string companyID = "103136";
+
+                string currentDirectory = Directory.GetCurrentDirectory();
+
+                // Construir la ruta completa al certificado PFX
+                string certPath = Path.Combine(currentDirectory, "cert", "BCPCW_API_EMPRESA2.pfx");
 
 
-    
+                var requestData = new
+                {
+                    companyId = companyID, // Código de compañía proporcionado por el banco
+                    data = jsonDataBanco   // Información encriptada
+                };
 
-  
+                // Serializar el objeto JSON a una cadena
+                string jsonData = JsonConvert.SerializeObject(requestData);
+
+                // Cargar el certificado PFX desde el archivo
+                X509Certificate2 certificate = new X509Certificate2(certPath, "C3pdcvtJ1R7a1,my");
+
+                // Agregar el certificado a la solicitud HTTP para autenticación
+                httpClientHandler.ClientCertificates.Add(certificate);
+
+
+                using (var httpClient = new HttpClient(httpClientHandler))
+                {
+                    // Codificar las credenciales en base64
+                    string credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{username}:{password}"));
+
+                    // Agregar el encabezado Authorization a la solicitud
+                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", credentials);
+
+                    // Agregar otros encabezados si es necesario
+                    //httpClient.DefaultRequestHeaders.Add("Content-Type", "application/json");
+                    httpClient.DefaultRequestHeaders.Add("Correlation-Id", "123");
+
+                    var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                    try
+                    {
+                        var response = await httpClient.PostAsync(url, content);
+                        response.EnsureSuccessStatusCode();
+
+                        return await response.Content.ReadAsStringAsync();
+                    }
+                    catch (HttpRequestException e)
+                    {
+                        // Manejar el error si la solicitud no es exitosa
+                        //Console.WriteLine($"Error: {e.Message}");
+                        return null;
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
         private bool OrdendepagoExists(int id)
         {
             return _context.Ordendepagos.Any(e => e.idordendepago == id);
@@ -263,7 +443,8 @@ namespace Sistema.Web.Controllers
             public int branchOfficeId { get; set; }
             public string firstDetail { get; set; }
             public string mail { get; set; }
-            public int bankId { get; set; }
+             public int bankId { get; set; }
+           
         }
 
         public class FormOddPayment
@@ -284,7 +465,7 @@ namespace Sistema.Web.Controllers
             public string firstDetail { get; set; }
             public string secondDetail { get; set; }
             public string mail { get; set; }
-            public string bankId { get; set; }
+            //public string bankId { get; set; }
             public double commission { get; set; }
             public string CommissionCurrency { get; set; }
         }

@@ -16,22 +16,22 @@ namespace Sistema.Web.Controllers
         private static string Thumbprintcert()
         {
             string currentDirectory = Directory.GetCurrentDirectory();
-            string certPath = Path.Combine(currentDirectory, "cert", "BCPCW_ENC_EMPRESA.pfx");
+            string certPath = Path.Combine(currentDirectory, "cert", "BCPCW_ENC_EMPRESA2.pfx");
             string pfxFilePath = certPath;
-            string pfxPassword = "abc123";
-
+            //string pfxPassword = "abc123";
+            string pfxPassword = "6v&b5zq.jhmU3aAK";
             X509Certificate2 certificate = new X509Certificate2(pfxFilePath, pfxPassword);
 
             // Obtener el thumbprint (huella digital) en formato hexadecimal
             string thumbprint = certificate.Thumbprint;
-            return thumbprint = thumbprint.ToLower()+pfxPassword;
-             
+            return thumbprint = thumbprint.ToLower() + pfxPassword;
+
         }
         public static string Encrypt(string plainText)
         {
 
             string password = Thumbprintcert();
-           
+
 
             if (plainText == null)
             {

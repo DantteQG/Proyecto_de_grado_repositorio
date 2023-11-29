@@ -656,12 +656,14 @@
                 this.idaprobador=item.idaprobador;
                 this.idcontador=item.idcontador;
 
-                this.moneda=item.moneda
+                this.moneda=item.moneda;
 
                 let me=this;
                 this.Selectdinamic(me.idtipogasto);
                 this.idespecifgasto=item.idespecifgasto;
                 this.listardetalle(me.id);
+
+                console.log(codigobanco)
             },
 
             close () {

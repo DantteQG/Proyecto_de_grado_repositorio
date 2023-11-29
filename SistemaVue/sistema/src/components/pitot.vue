@@ -24,7 +24,7 @@ data(){
         pivotData: [],
         aggregatorName: 'Sum',
         rendererName: 'Table Heatmap',
-        rows: ['especifgasto'],
+        rows: ['nombretipogasto','especifgasto'],
         cols: ['fechapromada'],
         vals: ['total']
     }
